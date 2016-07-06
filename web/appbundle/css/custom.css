@@ -1,0 +1,57 @@
+.title_step {
+    position: absolute;
+    top: 50%;
+}
+.download-btn {
+    cursor: pointer;
+    background-color: rgba(0, 192, 255, 1);
+    color: white;
+    width: 100%;
+}
+.download-btn-selected{
+    box-shadow: 0px 0px 10px 3px rgba(0, 192, 255, 0.5) inset;
+    background-color: white;
+    color: rgba(0, 192, 255, 1);
+}
+.img-step{
+    width: 58px;
+    float: left;
+    margin-right: 30px;
+}
+.section-nounours-choice {
+    background-image: url('../images/back_nounours.jpg');
+    background-repeat: no-repeat;
+}
+@media (min-width: 992px) {
+    .section-nounours-choice {
+        background-size: 60%;
+        background-position: 20% center;
+        padding: 40px 0;
+    }
+}
+@media (max-width: 670px) {
+    .section-nounours-choice {
+        background-size: 180%;
+        background-position: center center;
+    }
+}
+.img-logo {
+    height: 70%;
+}
+.head-nav {
+    background-color: rgba(255, 255, 255, 0.48);
+    position: fixed;
+    width: 100%;
+}
+.title_doudou {
+    margin: 60px 0 30px 0;
+}
+textarea.textarea-doudou {
+    padding: 10px;
+    background-color: white;
+    font-style: italic;
+    box-shadow: 0px 0px 10px 3px rgba(0, 192, 255, 0.5) inset;
+}
+#footer {
+    padding: 20px 0;
+}
