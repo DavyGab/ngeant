@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>{% block title %}BigDoudou{% endblock %}</title>
+
+    <!--pageMeta-->
+    {% block stylesheets %}
+        <!-- Loading Bootstrap -->
+        <link href="{{ asset('appbundle/css/bootstrap.css') }}" rel="stylesheet">
+        <!-- Loading Elements Styles -->
+        <link href="{{ asset('appbundle/css/style.css') }}" rel="stylesheet">
+        <!-- Loading Magnific-Popup Styles -->
+        <link href="{{ asset('appbundle/css/magnific-popup.css') }}" rel="stylesheet">
+        <!-- Datepicker Styles -->
+        <link href="{{ asset('appbundle/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet">
+        <!-- Custom Styles -->
+        <link href="{{ asset('appbundle/css/custom.css')  }}" rel="stylesheet">
+        <link href="{{ asset('appbundle/css/font-awesome-4.6.3/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    {% endblock %}
+
+    <!-- Favicons -->
+    <link rel="icon" href="{{ asset('appbundle/images/favicons/favicon-bigdoudou.png') }}" >
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset('appbundle/scripts/html5shiv.js') }}"</script>
+    <script src="{{ asset('appbundle/scripts/respond.min.js') }}"</script>
+    <![endif]-->
+    <!--headerIncludes-->
+
+    <style type="text/css"></style>
+</head>
+<body data-spy="scroll" data-target=".navMenuCollapse">
+    <div id="wrap">
+        {% include '::nav.html.twig' %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('appbundle/scripts/jquery-1.11.2.min.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/smoothscroll.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/jquery.smooth-scroll.min.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/placeholders.jquery.min.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/bootstrap-datepicker.min.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/bootstrap-datepicker-fr.js') }}"></script>
+            <script src="{{ asset('appbundle/scripts/custom.js') }}"></script>
+        {% endblock %}
+        {% include '::footer.html.twig' %}
+    </div>
+</body></html>

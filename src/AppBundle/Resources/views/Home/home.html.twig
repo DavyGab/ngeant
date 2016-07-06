@@ -1,0 +1,129 @@
+{% extends '::layout.html.twig' %}
+{% block body %}
+    {{ block('flashBag') }}
+    <!-- INTRO SLIDER -->
+    <header id="intro-half-left-3" class="intro-block bg-color3 fixed-bg double-padding" style="background-image: url('{{ asset('appbundle/images/bg52.jpg') }}');" data-selector="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="slogan">
+                        <h2 data-selector="h2"><strong>Faites-lui livrer un nounours géant et rendez-la heureuse</strong><br>
+                            Choisissez l'heure <br>
+                            Choisissez le lieu de livraison.<br>
+                            Laissez nous faire.
+                        </h2>
+                        <p data-selector="p"></p>
+                    </div>
+                    <a class="btn btn-lg btn-primary goto" href="#download-half-app-image" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-speech" data-selector=".icon"></i>Choisir un nounours</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="benefits-line" class="bg-color3 third-padding pattern-bg" style="background-image: url('{{ asset('appbundle/images/pattern-bg4.jpg') }}');">
+        <div class="container">
+            <h2 class="big-title text-center" data-selector="h2">3 étapes</h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <ul class="item-list-left">
+                        <li>
+                            <img class="img-step" src="{{ asset('appbundle/images/nounours.png') }}">
+                            <h3 class="text-center sep-zero-bottom">Choisissez un nounours</h3>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="item-list-left">
+                        <li>
+                            <img class="img-step" src="{{ asset('appbundle/images/lovecard.png') }}">
+                            <h3 class="text-center sep-zero-bottom">Ajoutez un petit mot</h3>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-4">
+                    <ul class="item-list-left">
+                        <li>
+                            <img class="img-step" src="{{ asset('appbundle/images/livraison.png') }}">
+                            <h3 class="text-center sep-zero-bottom">Choisissez une date et un lieu de livraison</h3>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h3 class="text-center third-padding">On s'occupe du reste.</h3>
+    </section>
+    {{ form_start(form, {'attr': {'role': 'form', 'id': 'form'} }) }}
+    <section id="download-half-app-image" data-selector="section" class="section-nounours-choice">
+        <div class="col-md-7 col-md-offset-4">
+            <h2 class="text-center" data-selector="h2">Choisissez la taille</h2>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="js-scrollTo download-btn text-center" href="#btn-1" id="btn-1" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></div>
+                </div>
+                <div class="col-md-5 col-md-offset-2">
+                    <div class="js-scrollTo download-btn text-center"  href="#btn-1" id="btn-2" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="element-rent-form" class="intro-block bg-color3 cover-bg half-padding" style="background-repeat: repeat; background-size: 10%; background-image:url('{{ asset('appbundle/images/pattern-bg4.jpg') }}')" data-selector="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <h3 class="title" data-selector="h3">Votre email</h3>
+                    <div class="form-group sep-half-bottom">
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-3" style="padding-top: 62px;">
+                    <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Envoyer un nounours</button>
+                </div>
+                {{ form_rest(form) }}
+            </div>
+        </div>
+    </section>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('#btn-1').click(function() {
+            $('#{{ form.produit.vars.id }}').val('1');
+        });
+        $('#btn-2').click(function() {
+            $('#{{ form.produit.vars.id }}').val('2');
+        });
+        $('#modalMessage').modal('show');
+        $('.js-scrollTo').on('click', function() { // Au clic sur un élément
+            var page = $(this).attr('href'); // Page cible
+            var speed = 750; // Durée de l'animation (en ms)
+            $('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+            $('#commande_message').focus();
+            return false;
+        });
+    </script>
+{% endblock %}
+
+{%  block flashBag %}
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            {% if type == 'error' %}
+                {% set type = 'Oups ...' %}
+                <div class="modal fade in" id="modalMessage" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3 class="modal-title">{{ type }}</h3>
+                            {{ message|raw }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
