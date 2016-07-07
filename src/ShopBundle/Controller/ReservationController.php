@@ -30,12 +30,13 @@ class ReservationController extends Controller
                 'lc' => 'FR',
                 'cmd' => '_xclick',
                 'currency_code' => 'EUR',
-                'business' => 'alexis.dana91@gmail.com', //'bigdoudou@gmail.com',
+                'business' => $this->getParameter('paypal_email'),
                 'tax' => 0,
                 'no_note' => 1
                 ),
             'titre' => 'Terminer la commande',
             'message' => 'Blablabla'
-        ));
+            )
+        );
     }
 }
