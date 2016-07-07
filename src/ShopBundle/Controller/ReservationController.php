@@ -21,18 +21,22 @@ class ReservationController extends Controller
 
         $produit = $commande->getProduit();
 
-        return $this->render('ShopBundle:Default:shortPage.html.twig', array(
-            'cancel_return' => $this->generateUrl('precommande_annulation'),
-            'notify_url' => $this->generateUrl('ipn_notification'),
-            'return' => $this->generateUrl('precommande_valide'),
-            'item_name' => $produit['nom'],
-            'amount' => $produit['prix'],
-            'lc' => 'FR',
-            'cmd' => '_xclick',
-            'currency_code' => 'EUR',
-            'business' => 'bigdoudou@gmail.com',
-            'tax' => 0,
-            'no_note' => 1
+        return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
+            'form' => array(
+                'cancel_return' => $this->generateUrl('precommande_annulation'),
+                'notify_url' => $this->generateUrl('ipn_notification'),
+                'return' => $this->generateUrl('precommande_valide'),
+                'item_name' => $produit['nom'],
+                'amount' => $produit['prix'],
+                'lc' => 'FR',
+                'cmd' => '_xclick',
+                'currency_code' => 'EUR',
+                'business' => 'bigdoudou@gmail.com',
+                'tax' => 0,
+                'no_note' => 1
+                ),
+            'titre' => 'Terminer la commande',
+            'message' => 'Blablabla'
         ));
     }
 }

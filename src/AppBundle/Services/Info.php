@@ -18,7 +18,20 @@ class Info {
         '2' => 2
     );
 
-    public function getProduitNom($id) {
+    protected $status = array(
+        '0' => 'Intéréssé',
+        '1' => 'Précommande',
+        '2' => 'Commande non payée',
+        '3' => 'Commande payée',
+        '4' => 'Commande envoyée',
+        '5' => 'Commande reçue et terminée'
+    );
+
+    public function getNomProduit($id) {
         return $this->produitNom[$id];
+    }
+
+    public function getPrixProduit($id) {
+        return $this->produitPrix[$id];
     }
 } 
