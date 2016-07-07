@@ -1,3 +1,6 @@
 services:
     app.crypt:
         class: AppBundle\Services\Crypt
+
+    app.info:
+        class: AppBundle\Services\Info

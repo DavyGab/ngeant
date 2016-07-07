@@ -15,14 +15,14 @@ class HomeController extends Controller
         $form = $this->get('form.factory')->create(CommandeEmailType::class, $commande);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $info = $this->get('info');
 
+            $info = $this->get('app.info');
             $em = $this->getDoctrine()->getManager();
             $commande->setStatus(0);
             $commande->setProduit(array(
                     'id' => $commande->getProduit(),
                     'nom' => $info->getNomProduit($commande->getProduit()),
-                    'prix' => $info->produitPrix($commande->getProduit())
+                    'prix' => $info->getPrixProduit($commande->getProduit())
                 )
             );
             $em->persist($commande);
