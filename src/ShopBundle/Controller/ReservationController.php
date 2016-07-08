@@ -20,6 +20,11 @@ class ReservationController extends Controller
         );
         $produit = $commande->getProduit();
 
+        $custom = array(
+            'id_commande' => $id_commande,
+            'email' => $email
+        );
+
         return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $crypt->decrypt($id_commande)), UrlGeneratorInterface::ABSOLUTE_URL),
@@ -32,7 +37,8 @@ class ReservationController extends Controller
                 'currency_code' => 'EUR',
                 'business' => $this->getParameter('paypal_email'),
                 'tax' => 0,
-                'no_note' => 1
+                'no_note' => 1,
+                'custom' => http_build_query($custom)
                 ),
             'titre' => 'Terminer la commande',
             'message' => 'Blablabla'

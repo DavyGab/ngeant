@@ -147,6 +147,13 @@ class Commande
     private $updatedAt;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="pasypal_info", type="json_array", nullable=true)
+     */
+    private $paypalInfo;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -531,5 +538,21 @@ class Commande
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaypalInfo()
+    {
+        return $this->paypalInfo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaypalInfo()
+    {
+        return $this->paypalInfo;
     }
 }

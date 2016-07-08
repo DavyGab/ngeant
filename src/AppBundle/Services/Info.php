@@ -20,7 +20,7 @@ class Info {
 
     protected $status = array(
         '0' => 'Intéréssé',
-        '1' => 'Précommande',
+        '1' => 'Précommande payée',
         '2' => 'Commande non payée',
         '3' => 'Commande payée',
         '4' => 'Commande envoyée',
