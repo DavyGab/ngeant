@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Commande
  *
- * @ORM\Table(name="commande")
+ * @ORM\Table(name="bigdoudou_commande")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\CommandeRepository")
  */
 class Commande
@@ -149,7 +149,7 @@ class Commande
     /**
      * @var array
      *
-     * @ORM\Column(name="pasypal_info", type="json_array", nullable=true)
+     * @ORM\Column(name="paypal_info", type="json_array", nullable=true)
      */
     private $paypalInfo;
 
@@ -541,7 +541,7 @@ class Commande
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getPaypalInfo()
     {
@@ -549,10 +549,10 @@ class Commande
     }
 
     /**
-     * @return mixed
+     * @param array $paypalInfo
      */
-    public function getPaypalInfo()
+    public function setPaypalInfo($paypalInfo)
     {
-        return $this->paypalInfo;
+        $this->paypalInfo = $paypalInfo;
     }
 }

@@ -27,9 +27,9 @@ class ReservationController extends Controller
 
         return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
             'form' => array(
-                'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $crypt->decrypt($id_commande)), UrlGeneratorInterface::ABSOLUTE_URL),
-                'notify_url' => $this->generateUrl('shop_ipn_notification'),
-                'return' => $this->generateUrl('shop_precommande_valide', array('id_commande' => $crypt->decrypt($id_commande)), UrlGeneratorInterface::ABSOLUTE_URL),
+                'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
+                'notify_url' => 'http://bigdoudou.shareyourstartup.com/app_dev.php/paypal/ipn',//$this->generateUrl('shop_ipn_notification'),
+                'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
                 'amount' => $produit['prix'],
                 'lc' => 'FR',
