@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Commande
  *
- * @ORM\Table(name="commande")
+ * @ORM\Table(name="bigdoudou_commande")
  * @ORM\Entity(repositoryClass="ShopBundle\Repository\CommandeRepository")
  */
 class Commande
