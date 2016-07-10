@@ -21,7 +21,7 @@ class Info {
     protected $status = array(
         '0' => 'Intéréssé',
         '1' => 'Précommande payée',
-        '2' => 'Commande non payée',
+        '2' => 'Commande annulé',
         '3' => 'Commande payée',
         '4' => 'Commande envoyée',
         '5' => 'Commande reçue et terminée'

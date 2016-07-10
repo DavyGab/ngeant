@@ -23,7 +23,7 @@ class PaiementController extends Controller
         $header = "POST /cgi-bin/webscr HTTP/1.0\r\n";
         $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
         $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-        $fp = fsockopen ('ipnpb.paypal.com', 443, $errno, $errstr, 30);
+        $fp = fsockopen ('ssl://www.sandbox.paypal.com', 443, $errno, $errstr, 30);
         $item_name = $request->request->get('item_name');
         $item_number = $request->request->get('item_number');
         $payment_status = $request->request->get('payment_status');

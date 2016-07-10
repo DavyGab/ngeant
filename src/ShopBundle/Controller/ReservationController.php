@@ -28,7 +28,7 @@ class ReservationController extends Controller
         return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
-                'notify_url' => 'http://bigdoudou.shareyourstartup.com/app_dev.php/paypal/ipn',//$this->generateUrl('shop_ipn_notification'),
+                'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
                 'amount' => $produit['prix'],
@@ -44,5 +44,37 @@ class ReservationController extends Controller
             'message' => 'Blablabla'
             )
         );
+    }
+
+    public function precommandeValidationAction() {
+
+        $titre = 'Commande enregistrée';
+        $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
+
+        return $this->render('AppBundle:Default:shortPage.html.twig', array(
+            'titre' => $titre,
+            'message' => $message
+        ));
+    }
+
+    public function precommandeAnnulationAction($id_commande) {
+        $em = $this->getDoctrine()->getManager();
+        $crypt = $this->container->get('app.crypt');
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneBy(
+            array(
+                'id'  =>  $crypt->decrypt($id_commande),
+                'email' => $email
+            )
+        );
+        $commande->setStatus(2);
+        $em->persist($commande);
+        $em->flush();
+
+        $commande = new Commande();
+        $form = $this->get('form.factory')->create(CommandeEmailType::class, $commande);
+
+        return $this->render('AppBundle:Home:home.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }
