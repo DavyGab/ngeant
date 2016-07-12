@@ -28,11 +28,18 @@ class HomeController extends Controller
             $em->persist($commande);
             $em->flush();
 
-            $crypt = $this->get('app.crypt');
-            return $this->redirectToRoute('shop_reservation', array(
-                'email' => $commande->getEmail(),
-                'id_commande' => $crypt->crypt($commande->getId())
-            ));
+            $info = $this->get('app.info');
+            if(!$info->isLivrable($commande->getCodePostal())) {
+                $titre = 'Oups..';
+                $message = 'Pour l\'instant nous ne livrons qu\'à Paris. Nous l\'étendrons très prochainement à la proche banlieue.';
+                $this->get('session')->getFlashBag()->add($titre, $message);
+            } else {
+                $crypt = $this->get('app.crypt');
+                return $this->redirectToRoute('shop_reservation', array(
+                    'email' => $commande->getEmail(),
+                    'id_commande' => urlencode($crypt->crypt($commande->getId()))
+                ));
+            }
         }
 
         return $this->render('AppBundle:Home:home.html.twig', array(

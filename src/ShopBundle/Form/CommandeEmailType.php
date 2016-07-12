@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CommandeEmailType extends AbstractType
 {
@@ -17,7 +18,8 @@ class CommandeEmailType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('produit', HiddenType::class)
+            ->add('codePostal', TextType::class, array('required' => true))
+            ->add('produit', HiddenType::class, array('empty_data' => 1))
         ;
     }
     

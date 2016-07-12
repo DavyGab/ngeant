@@ -10,7 +10,7 @@ class Info {
     );
 
     protected $produitPrix = array(
-        '1' => 60,
+        '1' => 0.01,
         '2' => 120
     );
 
@@ -27,11 +27,38 @@ class Info {
         '5' => 'Commande reçue et terminée'
     );
 
+    protected $codePostalParis = array(
+        '75001',
+        '75002',
+        '75003',
+        '75004',
+        '75005',
+        '75006',
+        '75007',
+        '75008',
+        '75009',
+        '75010',
+        '75011',
+        '75012',
+        '75013',
+        '75014',
+        '75015',
+        '75016',
+        '75017',
+        '75018',
+        '75019',
+        '75020'
+    );
+
     public function getNomProduit($id) {
         return $this->produitNom[$id];
     }
 
     public function getPrixProduit($id) {
         return $this->produitPrix[$id];
+    }
+
+    public function isLivrable($cp) {
+        return in_array($cp, $this->codePostalParis);
     }
 } 

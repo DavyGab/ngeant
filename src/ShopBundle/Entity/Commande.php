@@ -163,6 +163,9 @@ class Commande
         return $this->id;
     }
 
+    public function __construct() {
+    }
+
     /**
      * Set email
      *

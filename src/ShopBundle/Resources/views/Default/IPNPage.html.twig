@@ -1,18 +1,22 @@
 {% extends '::layout.html.twig' %}
 {% block body %}
-    <section id="benefits-line" class="bg-color3 third-padding pattern-bg" style="background-image: url('{{ asset('appbundle/images/pattern-bg4.jpg') }}');">
+    <section id="benefits-line" class="bg-color3 third-padding pattern-bg" style="background-size: 60%; background-position: left; background-repeat: no-repeat; background-image: url('{{ asset('appbundle/images/back_nounours.jpg') }}');">
         <div class="container" style="margin-top: 120px;">
-            <h2 class="big-title text-center" data-selector="h2">{{ titre }}</h2>
-            <div class="row">
+        	<div class="col-md-10 col-md-offset-2">
+            	<h2 class="text-center" data-selector="h2">{{ titre }}</h2>
+            	<div class="row">
                 <div class="col-sm-8 col-md-offset-2">
-                    <h3 class="text-center sep-zero-bottom">{{ message }}</h3>
-                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+                    <h3 class="text-center sep-zero-bottom">{{ message|raw }}</h3>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" style="border-top: 0;">
                         {% for key, value in form %}
                             <input type="hidden" name="{{ key }}" value="{{ value }}">
                         {% endfor %}
-                        <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Valider la précommande</button>
+                        <div class="col-md-offset-5" style="margin-top: 30px;">
+	                        <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Valider la précommande</button>
+                        </div>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
     </section>
