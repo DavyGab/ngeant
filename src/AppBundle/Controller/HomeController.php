@@ -29,9 +29,9 @@ class HomeController extends Controller
             $em->flush();
 
             $info = $this->get('app.info');
-            if(!$info->isLivrable($commande->getCodePostal())) {
+            if($info->getFraisDeLivraison($commande->getCodePostal()) === false) {
                 $titre = 'Oups..';
-                $message = 'Pour l\'instant nous ne livrons qu\'à Paris. Nous l\'étendrons très prochainement à la proche banlieue.';
+                $message = 'Pour l\'instant nous ne livrons qu\'à Paris et petite couronne. Nous étendrons la zone de livraison très prochainement.';
                 $this->get('session')->getFlashBag()->add($titre, $message);
             } else {
                 $crypt = $this->get('app.crypt');

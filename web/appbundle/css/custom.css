@@ -34,6 +34,9 @@
         background-size: 180%;
         background-position: center center;
     }
+    .promo_head {
+        display: none;
+    }
 }
 .img-logo {
     height: 70%;
@@ -54,4 +57,38 @@ textarea.textarea-doudou {
 }
 #footer {
     padding: 20px 0;
+}
+
+@media (min-width: 670px) {
+    .promo_head {
+        color:red;
+        font-size: 1.8em;
+        font-weight: 500;
+        line-height: 1.8em;
+    }
+    .promo_span {
+        display: none;
+    }
+}
+
+@media (max-width: 670px) {
+    .promo_span {
+        color:red;
+        font-size: 1.8em;
+        font-weight: 500;
+        line-height: 1.8em;
+    }
+}
+
+@media (min-width: 992px) {
+    .promo_logo {
+        top: 5%;
+        position: absolute;
+    }
+}
+@media (max-width: 768px) {
+    .promo_logo > img {
+        width: 20% !important;
+        min-width: 140px;
+    }
 }

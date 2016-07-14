@@ -3,18 +3,19 @@
     {{ block('flashBag') }}
     <!-- INTRO SLIDER -->
     <header id="intro-half-left-3" class="intro-block bg-color3 fixed-bg double-padding" style="background-image: url('{{ asset('appbundle/images/bg52.jpg') }}');" data-selector="header">
+        <div class="col-sm-2 col-sm-offset-2 promo_logo">
+            <img style="width:100%" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-md-offset-2" style="top: 5%; position: absolute;">
-                    <img style="width:100%" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
-                </div>
-                <div class="col-md-9">
+                <div class="col-sm-9">
                     <div class="slogan">
                         <h2 data-selector="h2"><strong>Faites-lui livrer un nounours géant et rendez-la heureuse</strong><br>
                             Choisissez l'heure <br>
                             Choisissez le lieu de livraison.<br>
                             Laissez nous faire.
                         </h2>
+                        <span class="promo_span">10% de réduction en s'inscrivant !</span>
                         <p data-selector="p"></p>
                     </div>
                     <a class="btn btn-lg btn-primary goto" href="#download-half-app-image" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-speech" data-selector=".icon"></i>Choisir un nounours</a>
@@ -74,7 +75,7 @@
         </div>
     </section>
     <section id="element-rent-form" class="intro-block bg-color3 cover-bg half-padding" style="background-repeat: repeat; background-size: 10%; background-image:url('{{ asset('appbundle/images/pattern-bg4.jpg') }}')" data-selector="section">
-        <div class="" style="top: 5%;position: absolute;width: 10%;min-width: 80px;right: 10%;top: 10%;">
+        <div class="" style="position: absolute;width: 10%;min-width: 80px;right: 10%;top: 10%;">
             <img style="width:100%" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
         </div>
         <div class="container">
@@ -91,11 +92,8 @@
                         {{ form_widget(form.codePostal, {'attr': {'class': 'form-control', 'placeholder': 'Code Postal', 'pattern': '[0-9]{5}'}}) }}
                     </div>
                 </div>
-                <div class="col-md-2 col-md-offset-4" style="top: 5%; position: absolute;">
-                    <img style="width:100%" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
-                </div>
-                <div class="col-md-3 col-md-offset-1" style="padding-top: 62px;">
-                    <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Bénéficier de l'offre<br>5€ de réduction</button>
+                <div class="col-md-3 col-md-offset-7" style="padding-top: 62px;">
+                    <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Bénéficier de l'offre<br>10% de réduction</button>
                 </div>
                 {{ form_rest(form) }}
             </div>
