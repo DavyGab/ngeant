@@ -26,9 +26,9 @@ class ReservationController extends Controller
         );
         $info = $this->get('app.info');
 
-        $total = round(0.90 * ($produit['prix'] + $info->getFraisDeLivraison($commande->getCodePostal())), 2);
+        $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
 
-        $info_commande = 'Nounours : ' . $produit['prix'] . '<br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Réduction : 10%<br>Total : ' . $total . '€';
+        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
 
         return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
             'form' => array(
@@ -36,7 +36,7 @@ class ReservationController extends Controller
                 'notify_url' => $this->generateUrl('shop_ipn_notification', array('email' => $email), UrlGeneratorInterface::ABSOLUTE_URL),
                 'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
-                'amount' => $total,
+                'amount' => round(0.90 * $produit['prix'], 2),
                 'lc' => 'FR',
                 'cmd' => '_xclick',
                 'currency_code' => 'EUR',
