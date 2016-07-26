@@ -94,4 +94,8 @@ class Info {
     public function getFraisDeLivraison($cp) {
         return isset($this->codePostal[$cp]) ? $this->fraisDeLivraison[$this->codePostal[$cp]] : false;
     }
+
+    public function getStatus() {
+        return $this->status;
+    }
 } 

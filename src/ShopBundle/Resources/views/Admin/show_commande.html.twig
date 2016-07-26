@@ -1,0 +1,60 @@
+{% extends '::layout.html.twig' %}
+{% block body %}
+    <section id="benefits-line" class="bg-color3 third-padding pattern-bg" style="background-repeat: repeat; background-size: 10%; background-image: url('{{ asset('appbundle/images/pattern-bg4.jpg') }}');">
+        <div class="container" style="margin-top: 40px;">
+            <div class="col-md-12">
+                <h2 class="text-center" data-selector="h2">Voilà</h2>
+                <div class="row">
+                    <div class="col-sm-10 col-md-offset-1">
+                        <table id="commandes" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Code Postal</th>
+                                    <th>Produit</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Code Postal</th>
+                                    <th>Produit</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            {% for commande in commandes %}
+                                <tr>
+                                    <td>{{ commande.email }}</td>
+                                    <td>{{ commande.codePostal }}</td>
+                                    <td>{{ commande.produit.nom }}</td>
+                                    <td>{{ attribute(statusToText, commande.status) }}</td>
+                                    <td>{{ commande.createdAt|date("d/m/Y") }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="/code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#commandes').DataTable();
+        } );
+    </script>
+{% endblock %}

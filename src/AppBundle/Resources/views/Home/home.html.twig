@@ -2,20 +2,20 @@
 {% block body %}
     {{ block('flashBag') }}
     <!-- INTRO SLIDER -->
-    <header id="intro-half-left-3" class="intro-block bg-color3 fixed-bg double-padding" style="background-image: url('{{ asset('appbundle/images/bg52.jpg') }}');" data-selector="header">
-        <div class="col-sm-2 col-sm-offset-2 promo_logo">
-            <img style="width:100%" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
+    <header id="intro-half-left-3" class="intro-block bg-color3 screen-height fixed-bg" data-selector="header">
+        <div class="col-md-2 col-md-offset-10 promo_logo">
+            <img style="max-height: 140px;" src="{{ asset('appbundle/images/livraison_gratuite.png') }}">
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-md-9">
                     <div class="slogan">
                         <h2 data-selector="h2"><strong>Faites-lui livrer un nounours géant et rendez-la heureuse</strong><br>
-                            Choisissez l'heure <br>
+                            Choisissez l'heure.<br>
                             Choisissez le lieu de livraison.<br>
                             Laissez nous faire.
                         </h2>
-                        <span class="promo_span">10% de réduction en s'inscrivant !</span>
+                        <span class="promo_span">Offre de lancement : 10% de réduction sur les pré-commandes</span>
                         <p data-selector="p"></p>
                     </div>
                     <a class="btn btn-lg btn-primary goto" href="#download-half-app-image" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-speech" data-selector=".icon"></i>Choisir un nounours</a>

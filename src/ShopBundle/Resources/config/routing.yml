@@ -13,3 +13,7 @@ shop_ipn_notification:
 shop_precommande_valide:
     path:     /reservation/success
     defaults: { _controller: ShopBundle:Reservation:precommandeValidation }
+
+show_commande:
+    path:     /rackel
+    defaults: { _controller: ShopBundle:Admin:rackel }

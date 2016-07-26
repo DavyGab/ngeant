@@ -34,9 +34,6 @@
         background-size: 180%;
         background-position: center center;
     }
-    .promo_head {
-        display: none;
-    }
 }
 .img-logo {
     height: 70%;
@@ -59,24 +56,17 @@ textarea.textarea-doudou {
     padding: 20px 0;
 }
 
-@media (min-width: 670px) {
-    .promo_head {
-        color:red;
-        font-size: 1.8em;
-        font-weight: 500;
-        line-height: 1.8em;
-    }
+@media (max-width: 992px) {
     .promo_span {
+        color:red;
+        font-size: 1.3em;
+        font-weight: 500;
+    }
+    .promo_head {
         display: none;
     }
-}
-
-@media (max-width: 670px) {
-    .promo_span {
-        color:red;
-        font-size: 1.8em;
-        font-weight: 500;
-        line-height: 1.8em;
+    #intro-half-left-3 {
+        background-image: url('/appbundle/images/bg52-gau.jpg');
     }
 }
 
@@ -84,6 +74,18 @@ textarea.textarea-doudou {
     .promo_logo {
         top: 5%;
         position: absolute;
+    }
+    .promo_head {
+             color:red;
+             font-size: 1.3em;
+             font-weight: 500;
+             line-height: 60px;
+         }
+    .promo_span {
+        display: none;
+    }
+    #intro-half-left-3 {
+        background-image: url('/appbundle/images/bg52.jpg');
     }
 }
 @media (max-width: 768px) {

@@ -1,0 +1,25 @@
+{% extends '::layout.html.twig' %}
+{% block body %}
+    <section id="benefits-line" class="bg-color3 third-padding pattern-bg" style="background-size: 65%; background-color: white; background-position: left bottom; background-repeat: no-repeat; background-image: url('{{ asset('appbundle/images/back_nounours.jpg') }}');">
+        <div class="container" style="margin-top: 120px;">
+            <div class="col-md-10 col-md-offset-2">
+                <h2 class="text-center" data-selector="h2">Bienvenue</h2>
+                <div class="row">
+                    <div class="col-sm-8 col-md-offset-2">
+                        <form style="border-top: 0;" METHOD="post">
+                            <div class="col-md-6 col-md-offset-1" style="margin-top: 30px;">
+                                <input type="password" name="password" class="form-control" placeholder="Mot de passe">
+                            </div>
+                            <div class="col-md-3 col-md-offset-1" style="margin-top: 30px;">
+                                <button type="submit" id="rent_submit" class="btn btn-block btn-primary">Valider</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
