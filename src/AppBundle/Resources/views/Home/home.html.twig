@@ -66,10 +66,15 @@
             <h2 class="text-center" data-selector="h2">Choisissez la taille</h2>
             <div class="row">
                 <div class="col-md-5">
-                    <div class="js-scrollTo download-btn text-center download-btn-selected" href="#btn-1" id="btn-1" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></div>
+                <input type="radio" name="radio" id="radio1" class="radio" checked/>
+                <label for="radio1"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></label>
+                    {# <div class="js-scrollTo download-btn text-center download-btn-selected" href="#btn-1" id="btn-1" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></div> #}
                 </div>
                 <div class="col-md-5 col-md-offset-2">
-                    <div class="js-scrollTo download-btn text-center"  href="#btn-1" id="btn-2" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></div>
+                <input type="radio" name="radio" id="radio1" class="radio" checked/>
+                <label for="radio1"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></label>
+                    
+                    {# <div class="js-scrollTo download-btn text-center"  href="#btn-1" id="btn-2" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></div> #}
                 </div>
             </div>
         </div>
@@ -113,10 +118,10 @@
         });
         $('#modalMessage').modal('show');
         $('.js-scrollTo').on('click', function() { // Au clic sur un élément
-            var page = $(this).attr('href'); // Page cible
-            var speed = 750; // Durée de l'animation (en ms)
-            $('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
-            $('#commande_message').focus();
+            //var page = $(this).attr('href'); // Page cible
+            //var speed = 750; // Durée de l'animation (en ms)
+            //$('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+            //$('#commande_message').focus();
             return false;
         });
     </script>
