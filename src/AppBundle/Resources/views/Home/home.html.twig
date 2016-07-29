@@ -65,16 +65,13 @@
         <div class="col-md-7 col-md-offset-4">
             <h2 class="text-center" data-selector="h2">Choisissez la taille</h2>
             <div class="row">
-                <div class="col-md-5">
-                <input type="radio" name="radio" id="radio1" class="radio" checked/>
-                <label for="radio1"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></label>
-                    {# <div class="js-scrollTo download-btn text-center download-btn-selected" href="#btn-1" id="btn-1" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart-empty" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></div> #}
+                <div class="col-md-5 h_btn">
+                    <input type="radio" name="radio" id="radio1" class="radio" value="1" checked/>
+                    <label for="radio1" id="radio1lab" class="download-btn text-center"><i class="fa fa-check-square-o" data-selector=".icon"></i>GRAND NOUNOURS (1m)<b>60€</b></label>
                 </div>
-                <div class="col-md-5 col-md-offset-2">
-                <input type="radio" name="radio" id="radio1" class="radio" checked/>
-                <label for="radio1"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></label>
-                    
-                    {# <div class="js-scrollTo download-btn text-center"  href="#btn-1" id="btn-2" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-heart" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></div> #}
+                <div class="col-md-5 col-md-offset-2 h_btn">
+                    <input type="radio" name="radio" id="radio2" class="radio" value="2"/>
+                    <label for="radio2" id="radio2lab" class="download-btn text-center"><i class="fa fa-square-o" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)<b>120€</b></label>
                 </div>
             </div>
         </div>
@@ -110,10 +107,10 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('#btn-1').click(function() {
+        $('#radio1lab').click(function() {
             $('#{{ form.produit.vars.id }}').val('1');
         });
-        $('#btn-2').click(function() {
+        $('#radio2lab').click(function() {
             $('#{{ form.produit.vars.id }}').val('2');
         });
         $('#modalMessage').modal('show');

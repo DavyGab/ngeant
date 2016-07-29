@@ -24,16 +24,18 @@ $('.download-btn').click(function(){
     $('#element-rent-form').show();
 });
 
-$('#btn-1').click(function(){
-    if (!$(this).hasClass('download-btn-selected')) {
-        $(this).addClass('download-btn-selected');
-    }
-    $('#btn-2').removeClass('download-btn-selected');
-});
 
-$('#btn-2').click(function(){
-    if (!$(this).hasClass('download-btn-selected')) {
-        $(this).addClass('download-btn-selected');
+$('input[type=radio]').change(function() {
+    if($(this).val() == "1"){
+        $('#radio1lab > i').addClass('fa-check-square-o');
+        $('#radio1lab > i').removeClass('fa-square-o');
+        $('#radio2lab > i').addClass('fa-square-o');
+        $('#radio2lab > i').removeClass('fa-check-square-o');
     }
-    $('#btn-1').removeClass('download-btn-selected');
+    else if($(this).val() == "2"){
+        $('#radio1lab > i').addClass('fa-square-o');
+        $('#radio1lab > i').removeClass('fa-check-square-o');
+        $('#radio2lab > i').addClass('fa-check-square-o');
+        $('#radio2lab > i').removeClass('fa-square-o');
+    }
 });
