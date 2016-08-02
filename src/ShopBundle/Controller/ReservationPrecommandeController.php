@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ShopBundle\Form\CommandeType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ReservationController extends Controller
+class ReservationPrecommandeController extends Controller
 {
     public function precommandeAction($email, $id_commande)
     {
@@ -18,6 +18,11 @@ class ReservationController extends Controller
                 'email' => $email
             )
         );
+
+        if (!in_array($commande->getStatus(), array(0, 2))) {
+            return $this->redirectToRoute('home_precommande');
+        }
+
         $produit = $commande->getProduit();
 
         $custom = array(
@@ -59,7 +64,7 @@ class ReservationController extends Controller
         $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
         $this->get('session')->getFlashBag()->add($titre, $message);
 
-        return $this->forward('AppBundle:Home:index');
+        return $this->forward('AppBundle:Home:indexPrecommande');
     }
 
     public function precommandeAnnulationAction($id_commande) {
@@ -74,6 +79,6 @@ class ReservationController extends Controller
         $em->persist($commande);
         $em->flush();
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('home_precommande');
     }
 }

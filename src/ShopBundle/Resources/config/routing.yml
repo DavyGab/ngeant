@@ -1,4 +1,4 @@
-shop_reservation:
+shop_reservation_precommande:
     path:     /reservation/email/{email}/reservation/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
@@ -17,3 +17,7 @@ shop_precommande_valide:
 show_commande:
     path:     /rackel
     defaults: { _controller: ShopBundle:Admin:rackel }
+
+show_message:
+    path:     /message
+    defaults: { _controller: ShopBundle:Reservation:message }

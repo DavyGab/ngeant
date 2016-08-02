@@ -1,4 +1,4 @@
-{% extends '::layout.html.twig' %}
+{% extends '::layout_precommande.html.twig' %}
 {% block body %}
     {{ block('flashBag') }}
     <!-- INTRO SLIDER -->
@@ -15,6 +15,8 @@
                             Choisissez le lieu de livraison.<br>
                             Laissez nous faire.
                         </h2>
+                        <span class="promo_span">Offre de lancement : 10% de réduction sur les pré-commandes</span>
+                        <p data-selector="p"></p>
                     </div>
                     <a class="btn btn-lg btn-primary goto" href="#benefits-line" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon icon-speech" data-selector=".icon"></i>Comment ça marche ?</a>
                 </div>
@@ -94,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-md-offset-7" style="padding-top: 62px;">
-                    <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Commander</button>
+                    <button type="submit" id="rent_submit" class="btn btn-lg btn-block btn-primary">Bénéficier de l'offre<br>10% de réduction</button>
                 </div>
                 {{ form_rest(form) }}
             </div>
@@ -113,6 +115,13 @@
             $('#{{ form.produit.vars.id }}').val('2');
         });
         $('#modalMessage').modal('show');
+        $('.js-scrollTo').on('click', function() { // Au clic sur un élément
+            //var page = $(this).attr('href'); // Page cible
+            //var speed = 750; // Durée de l'animation (en ms)
+            //$('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
+            //$('#commande_message').focus();
+            return false;
+        });
     </script>
 {% endblock %}
 
