@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ShopBundle\Form\CommandeType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ReservationPrecommandeController extends Controller
+class ReservationController extends Controller
 {
     public function precommandeAction($email, $id_commande)
     {
@@ -80,5 +80,13 @@ class ReservationPrecommandeController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('home_precommande');
+    }
+
+    public function messageAction($id) {
+        return $this->render('ShopBundle:Default:step2Message.html.twig', array(
+            'form' => array(
+                'id_campaign' => $id
+            )
+        );
     }
 }

@@ -40,7 +40,7 @@ class HomeController extends Controller
                 $crypt = $this->get('app.crypt');
 
                 if ($currentRoute == 'home') {
-                    return $this->redirectToRoute('show_message', array(
+                    return $this->redirectToRoute('shop_step_2_message', array(
                         'email' => $commande->getEmail(),
                         'id_commande' => urlencode($crypt->crypt($commande->getId()))
                     ));
@@ -81,7 +81,7 @@ class HomeController extends Controller
         if ($currentRoute == 'home') {
             $render_array = array(
                 'form' => $form->createView(),
-                'precommande' => 1
+                'precommande' => 0
             );
         } else {
             $render_array = array(
