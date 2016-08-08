@@ -7,6 +7,7 @@ use ShopBundle\Form\CommandeType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use ShopBundle\Entity\Commande;
 use ShopBundle\Form\CommandeMessageType;
+use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
 {
