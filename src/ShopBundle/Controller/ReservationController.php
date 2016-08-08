@@ -74,7 +74,7 @@ class ReservationController extends Controller
         return $this->redirectToRoute('home_precommande');
     }
 
-    public function messageAction($id_commande) {
+    public function messageAction(Request $request, $id_commande) {
         $commandeMessage = new Commande();
         $form = $this->get('form.factory')->create(CommandeMessageType::class, $commandeMessage);
 
