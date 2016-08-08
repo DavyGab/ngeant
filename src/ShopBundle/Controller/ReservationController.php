@@ -82,6 +82,7 @@ class ReservationController extends Controller
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $info = $this->get('app.info');
             $em = $this->getDoctrine()->getManager();
+            $crypt = $this->container->get('app.crypt');
             $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
             $commande->setMessage($commandeMessage->getMessage());
             $em->persist($commande);
