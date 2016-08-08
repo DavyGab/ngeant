@@ -9,7 +9,7 @@ use ShopBundle\Entity\PaypalInfo;
 
 class PaiementController extends Controller
 {
-    public function IpnNotificationAction(Request $request, $email)
+    public function IpnNotificationAction(Request $request)
     {
         $url = 'https://www.paypal.com/cgi-bin/webscr';
 
@@ -55,12 +55,7 @@ class PaiementController extends Controller
                     $log->info('Paiement bien recu de '. $payer_email);
                     //On récupère la commande correspondant a l'email et à l'id de commande
                     $crypt = $this->get('app.crypt');
-                    $commande = $em->getRepository('ShopBundle:Commande')->findOneBy(
-                        array(
-                            'id'  =>  $crypt->decrypt(urldecode($custom['id_commande'])),
-                            'email' => $custom['email']
-                        )
-                    );
+                    $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($custom['id_commande'])));
                     if (!$commande) {
                         $log->info('Le paiement recu  de '. $payer_email .' ne correspond a aucune commande');
                         $subject = 'Erreur lors du paiement de votre commande';
@@ -68,7 +63,7 @@ class PaiementController extends Controller
                         $message = \Swift_Message::newInstance()
                             ->setSubject($subject)
                             ->setFrom('paypal@bigdoudou.fr')
-                            ->setTo($email)
+                            ->setTo($commande->getEmail())
                             ->addBcc('paypal@bigdoudou.fr')
                             ->setBody(
                                 $this->renderView(

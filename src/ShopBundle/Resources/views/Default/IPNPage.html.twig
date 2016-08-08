@@ -5,8 +5,8 @@
         	<div class="col-md-10 col-md-offset-2">
             	<h2 class="text-center" data-selector="h2">{{ titre }}</h2>
             	<div class="row">
-                <div class="col-sm-8 col-md-offset-2">
-                    <h3 class="text-center sep-zero-bottom">{{ message|raw }}</h3>
+                <div class="col-sm-8 col-md-offset-4">
+                    <h3 class="text-justify sep-zero-bottom">{{ message|raw }}</h3>
                     <h4 class="sep-zero-bottom" style="text-align: right;">{{ info|raw }}</h4>
                     <form action="https://www.paypal.com/cgi-bin/webscr" style="border-top: 0;">
                         {% for key, value in form %}

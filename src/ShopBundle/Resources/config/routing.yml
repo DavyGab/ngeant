@@ -1,5 +1,5 @@
-shop_reservation:
-    path:     /reservation/email/{email}/reservation/{id_commande}
+shop_reservation_precommande:
+    path:     /commande/{id_commande}/paiement
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
 shop_precommande_annulation:
@@ -7,7 +7,7 @@ shop_precommande_annulation:
     defaults: { _controller: ShopBundle:Reservation:precommandeAnnulation }
 
 shop_ipn_notification:
-    path:     /paypal/ipn/email/{email}
+    path:     /paypal/ipn
     defaults: { _controller: ShopBundle:Paiement:IpnNotification }
 
 shop_precommande_valide:
@@ -17,3 +17,7 @@ shop_precommande_valide:
 show_commande:
     path:     /rackel
     defaults: { _controller: ShopBundle:Admin:rackel }
+
+shop_step_2_message:
+    path:     /commande/{id_commande}/message
+    defaults: { _controller: ShopBundle:Reservation:message }
