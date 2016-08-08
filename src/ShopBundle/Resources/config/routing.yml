@@ -7,7 +7,7 @@ shop_precommande_annulation:
     defaults: { _controller: ShopBundle:Reservation:precommandeAnnulation }
 
 shop_ipn_notification:
-    path:     /paypal/ipn/email/{email}
+    path:     /paypal/ipn
     defaults: { _controller: ShopBundle:Paiement:IpnNotification }
 
 shop_precommande_valide:
