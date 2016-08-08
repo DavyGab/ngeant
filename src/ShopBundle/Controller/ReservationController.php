@@ -91,8 +91,8 @@ class ReservationController extends Controller
         }
 
         return $this->render('ShopBundle:Default:step2Message.html.twig', array(
-                'form' => $form->createView(),
-                'id_campaign' => $id_commande)
+            'form' => $form->createView(),
+            'id_campaign' => $id_commande
         );
     }
 }
