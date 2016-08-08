@@ -8,16 +8,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ReservationController extends Controller
 {
-    public function precommandeAction($email, $id_commande)
+    public function precommandeAction($id_commande)
     {
         $em = $this->getDoctrine()->getManager();
         $crypt = $this->container->get('app.crypt');
-        $commande = $em->getRepository('ShopBundle:Commande')->findOneBy(
-            array(
-                'id'  =>  $crypt->decrypt(urldecode($id_commande)),
-                'email' => $email
-            )
-        );
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
 
         if (!in_array($commande->getStatus(), array(0, 2))) {
             return $this->redirectToRoute('home_precommande');
@@ -26,8 +21,7 @@ class ReservationController extends Controller
         $produit = $commande->getProduit();
 
         $custom = array(
-            'id_commande' => $id_commande,
-            'email' => $email
+            'id_commande' => $id_commande
         );
         $info = $this->get('app.info');
 
@@ -38,7 +32,7 @@ class ReservationController extends Controller
         return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
-                'notify_url' => $this->generateUrl('shop_ipn_notification', array('email' => $email), UrlGeneratorInterface::ABSOLUTE_URL),
+                'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
                 'amount' => round(0.90 * $produit['prix'], 2),
@@ -90,10 +84,7 @@ class ReservationController extends Controller
             $em->persist($commande);
             $em->flush();
 
-            $this->redirectToRoute('shop_reservation_precommande', array(
-                'email' => $commande->getEmail(),
-                'id_campaign' => $id_commande)
-            );
+            $this->redirectToRoute('shop_reservation_precommande', array('id_campaign' => $id_commande));
         }
 
         return $this->render('ShopBundle:Default:step2Message.html.twig', array(
