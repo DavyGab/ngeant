@@ -88,12 +88,12 @@ class ReservationController extends Controller
             $em->persist($commande);
             $em->flush();
 
-            return $this->redirectToRoute('shop_reservation_precommande', array('id_campaign' => $id_commande));
+            return $this->redirectToRoute('shop_reservation_precommande', array('id_commande' => $id_commande));
         }
 
         return $this->render('ShopBundle:Default:step2Message.html.twig', array(
             'form' => $form->createView(),
-            'id_campaign' => $id_commande)
+            'id_commande' => $id_commande)
         );
     }
 }
