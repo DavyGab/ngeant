@@ -5,6 +5,7 @@ namespace ShopBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ShopBundle\Form\CommandeType;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use ShopBundle\Entity\Commande;
 
 class ReservationController extends Controller
 {
