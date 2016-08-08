@@ -1,5 +1,5 @@
 shop_reservation_precommande:
-    path:     /commande/{id_commande}/new
+    path:     /commande/{id_commande}/paiement
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
 shop_precommande_annulation:

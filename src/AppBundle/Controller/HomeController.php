@@ -68,10 +68,7 @@ class HomeController extends Controller
                      * /Mail
                      */
 
-                    return $this->redirectToRoute('shop_reservation_precommande', array(
-                        'email' => $commande->getEmail(),
-                        'id_commande' => urlencode($crypt->crypt($commande->getId()))
-                    ));
+                    return $this->redirectToRoute('shop_reservation_precommande', array('id_commande' => urlencode($crypt->crypt($commande->getId()))));
                 }
 
             }
