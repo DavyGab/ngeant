@@ -41,11 +41,10 @@ class HomeController extends Controller
 
                 if ($currentRoute == 'home') {
                     return $this->redirectToRoute('shop_step_2_message', array(
-                        'email' => $commande->getEmail(),
                         'id_commande' => urlencode($crypt->crypt($commande->getId()))
                     ));
                 } else {
-                    /*
+                /*
                  * Envoi du mail
                  */
                     $message = \Swift_Message::newInstance()

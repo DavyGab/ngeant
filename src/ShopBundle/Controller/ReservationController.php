@@ -70,11 +70,7 @@ class ReservationController extends Controller
     public function precommandeAnnulationAction($id_commande) {
         $em = $this->getDoctrine()->getManager();
         $crypt = $this->container->get('app.crypt');
-        $commande = $em->getRepository('ShopBundle:Commande')->findOneBy(
-            array(
-                'id'  =>  $crypt->decrypt(urldecode($id_commande)),
-            )
-        );
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
         $commande->setStatus(2);
         $em->persist($commande);
         $em->flush();
@@ -82,11 +78,30 @@ class ReservationController extends Controller
         return $this->redirectToRoute('home_precommande');
     }
 
-    public function messageAction($id) {
+    public function messageAction($id_commande) {
+        $commandeMessage = new Commande();
+        $form = $this->get('form.factory')->create(CommandeMessageType::class, $commandeMessage);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $info = $this->get('app.info');
+            $em = $this->getDoctrine()->getManager();
+            $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
+            $commande->setMessage($commandeMessage->getMessage());
+            $em->persist($commande);
+            $em->flush();
+
+            $this->redirectToRoute('shop_reservation_precommande', array(
+                'email' => $commande->getEmail(),
+                'id_campaign' => $id_commande)
+            );
+        }
+
         return $this->render('ShopBundle:Default:step2Message.html.twig', array(
-            'form' => array(
-                'id_campaign' => $id
-            )
+                'form' => $form->createView(),
+                'id_campaign' => $id_commande)
         );
     }
 }
+
+
+

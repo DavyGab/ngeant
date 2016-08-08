@@ -19,5 +19,5 @@ show_commande:
     defaults: { _controller: ShopBundle:Admin:rackel }
 
 shop_step_2_message:
-    path:     /commande/{id}/message
+    path:     /commande/{id_commande}/message
     defaults: { _controller: ShopBundle:Reservation:message }
