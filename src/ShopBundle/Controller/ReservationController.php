@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
 {
-    public function precommandeAction($id_commande)
+    public function precommandeAction(Request $request, $id_commande)
     {
         $em = $this->getDoctrine()->getManager();
         $crypt = $this->container->get('app.crypt');
