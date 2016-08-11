@@ -30,7 +30,7 @@ class ReservationController extends Controller
 
         $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
 
-        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
+        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br><span style="color: red;font-weight: bolder;">Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€</span><br>Total : ' . $total . '€';
 
         $returnArray = array(
             'form' => array(
