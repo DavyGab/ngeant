@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ReservationController extends Controller
 {
-    public function precommandeAction($id_commande)
+    public function precommandeAction(Request $request, $id_commande)
     {
         $em = $this->getDoctrine()->getManager();
         $crypt = $this->container->get('app.crypt');
@@ -30,9 +30,9 @@ class ReservationController extends Controller
 
         $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
 
-        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
+        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br><span style="color: red;font-weight: bolder;">Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€</span><br>Total : ' . $total . '€';
 
-        return $this->render('ShopBundle:Default:IPNPage.html.twig', array(
+        $returnArray = array(
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
                 'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
@@ -48,11 +48,21 @@ class ReservationController extends Controller
                 'no_note' => 1,
                 'custom' => http_build_query($custom)
                 ),
+            'info' => $info_commande,
             'titre' => 'Terminer la pré-commande',
-            'message' => 'Votre commande est bientôt terminée..<br>Nous reviendrons rapidement vers vous pour le choix de la date, de l\'heure et du lieu de livraison afin de profiter de l\'offre de réduction.',
-            'info' => $info_commande
-            )
+            'bouton' => 'Valider la precommande'
         );
+        $currentRoute = $request->attributes->get('_route');
+        if ($currentRoute == 'shop_reservation_precommande') {
+            $returnArray['message'] = 'Votre commande est bientôt terminée..<br>Nous reviendrons rapidement vers vous pour le choix de la date, de l\'heure et du lieu de livraison afin de profiter de l\'offre de réduction.';
+        } else {
+            $returnArray['message'] = 'Le site est encore en phase de lancement et devrait être entièrement opérationnel d\'ici un mois. Nous reviendrons rapidement vers vous afin de finaliser votre commande (choix de la date, de l\'heure et du lieu de livraison).<br>
+Pour vous remercier de votre confiance, nous vous offrons dès à présent 10% de réduction sur votre commande.<br>
+Encore merci et à très bientôt,<br>
+L\'équipe BigDoudou';
+        }
+        
+        return $this->render('ShopBundle:Default:IPNPage.html.twig', $returnArray);
     }
 
     public function precommandeValidationAction() {
@@ -88,7 +98,7 @@ class ReservationController extends Controller
             $em->persist($commande);
             $em->flush();
 
-            return $this->redirectToRoute('shop_reservation_precommande', array('id_commande' => $id_commande));
+            return $this->redirectToRoute('shop_reservation_commande', array('id_commande' => $id_commande));
         }
 
         return $this->render('ShopBundle:Default:step2Message.html.twig', array(
