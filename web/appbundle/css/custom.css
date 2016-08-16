@@ -126,7 +126,7 @@ input.radio:checked ~ label:before {
     }
 }
 
-.nounours-choice {
+#nounours-choice {
     padding-top: 45px;
     padding-bottom: 15px;
 }
