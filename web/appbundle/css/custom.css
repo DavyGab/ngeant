@@ -14,23 +14,6 @@
     float: left;
     margin-right: 30px;
 }
-.section-nounours-choice {
-    background-image: url('../images/back_nounours.jpg');
-    background-repeat: no-repeat;
-}
-@media (min-width: 992px) {
-    .section-nounours-choice {
-        background-size: 60%;
-        background-position: 20% 0%;
-        padding: 40px 0;
-    }
-}
-@media (max-width: 670px) {
-    .section-nounours-choice {
-        background-size: 180%;
-        background-position: center center;
-    }
-}
 .img-logo {
     height: 70%;
 }
@@ -141,4 +124,9 @@ input.radio:checked ~ label:before {
     .h_btn {
         height: 0;
     }
+}
+
+.nounours-choice {
+    padding-top: 45px;
+    padding-bottom: 15px;
 }
