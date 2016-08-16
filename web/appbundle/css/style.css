@@ -688,7 +688,6 @@ form.line-form.five-fields button{
 }
 
 .download-btn,
-.download-btn:active,
 .download-btn:visited {
 	display: inline-block;
 	position: relative;
