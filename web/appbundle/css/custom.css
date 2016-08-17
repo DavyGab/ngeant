@@ -130,3 +130,8 @@ input.radio:checked ~ label:before {
     padding-top: 45px;
     padding-bottom: 15px;
 }
+
+.control-label {
+    color: #00c0ff;
+    font-weight: bold;
+}
