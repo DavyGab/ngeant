@@ -44,7 +44,9 @@
 <body data-spy="scroll" data-target=".navMenuCollapse">
     <div id="wrap">
         {% include '::nav.html.twig' %}
-        {% block body %}{% endblock %}
+        {% block body %}{% endblock %}  
+    </div>
+        {% include '::footer.html.twig' %}
         {% block javascripts %}
             <script src="{{ asset('appbundle/scripts/jquery-1.11.2.min.js') }}"></script>
             <script src="{{ asset('appbundle/scripts/bootstrap.min.js') }}"></script>
@@ -55,8 +57,6 @@
             <script src="{{ asset('appbundle/scripts/bootstrap-datepicker-fr.js') }}"></script>
             <script src="{{ asset('appbundle/scripts/custom.js') }}"></script>
         {% endblock %}
-        {% include '::footer.html.twig' %}
-    </div>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

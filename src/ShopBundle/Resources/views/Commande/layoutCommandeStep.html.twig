@@ -1,0 +1,37 @@
+{% extends '::layout.html.twig' %}
+{% block body %}
+	<img src="{{ asset('appbundle/images/header_commande2.jpg') }}" style="width:100%">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+		<div class="col-md-12">
+			<h3 class="mini_title">Offrir un nounours</h3>
+			<p class="subtext">Vous souhaitez offrir un cadeau original pour votre petite amie ?</p>
+		</div>
+		{% if step is defined %}
+			<div class="col-md-12" style="margin-bottom: 50px; height: 6em;">
+				<div class="checkout-wrap">
+					<ul class="checkout-bar">
+						{% if step == 1 %}
+							<li class="active">Informations</li>
+							<li class="next">Message</li>
+							<li class="">Paiement</li>
+						{% elseif step == 2 %}
+							<li class="visited">Informations</li>
+							<li class="active">Message</li>
+							<li class="next">Paiement</li>
+						{% elseif step == 3 %}
+							<li class="visited">Informations</li>
+							<li class="visited">Message</li>
+							<li class="active end">Paiement</li>
+						{% elseif step == 4 %}
+							<li class="visited">Informations</li>
+							<li class="visited">Message</li>
+							<li class="visited end">Paiement</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+		{% block BodyCommandeStep %}
+		{% endblock %}
+	</div>
+{% endblock %}
