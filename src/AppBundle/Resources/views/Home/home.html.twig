@@ -138,3 +138,6 @@
         {% endfor %}
     {% endfor %}
 {% endblock %}
+{% block facebook_pixel %}
+    fbq('track', "PageView");
+{% endblock %}
