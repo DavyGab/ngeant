@@ -1,9 +1,9 @@
 shop_reservation_precommande:
-    path:     /precommande/{id_commande}/paiement
+    path:     /precommande/paiement/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
 shop_reservation_commande:
-    path:     /commande/{id_commande}/paiement
+    path:     /commande/paiement/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
 shop_precommande_annulation:
@@ -23,5 +23,5 @@ show_commande:
     defaults: { _controller: ShopBundle:Admin:rackel }
 
 shop_step_2_message:
-    path:     /commande/{id_commande}/message
+    path:     /commande/message/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:message }
