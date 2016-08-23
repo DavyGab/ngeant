@@ -3,38 +3,11 @@
 	<img src="{{ asset('appbundle/images/header_commande2.jpg') }}" style="width:100%">
 	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3">
 		<div class="col-md-12">
-			{% if text == 1 %}
-				<h3 class="mini_title">{{ minititle }}</h3>
-				<p class="subtext">{{ subtext }}</p>
-			{% elseif text == 2 %}
-			{% elseif text == 3 %}
-			{% elseif text == 4 %}
+			{% block minititle %}
+			{% endblock %}
 		</div>
-		{% if step is defined %}
-			<div class="col-md-12 breadcrumb">
-				<div class="checkout-wrap">
-					<ul class="checkout-bar">
-						{% if step == 1 %}
-							<li class="active">Informations</li>
-							<li class="next">Message</li>
-							<li class="">Paiement</li>
-						{% elseif step == 2 %}
-							<li class="visited">Informations</li>
-							<li class="active">Message</li>
-							<li class="next">Paiement</li>
-						{% elseif step == 3 %}
-							<li class="visited">Informations</li>
-							<li class="visited">Message</li>
-							<li class="active end">Paiement</li>
-						{% elseif step == 4 %}
-							<li class="visited">Informations</li>
-							<li class="visited">Message</li>
-							<li class="visited end">Paiement</li>
-						{% endif %}
-					</ul>
-				</div>
-			</div>
-		{% endif %}
+		{% block breadcrumb %}
+		{% endblock %}
 		{% block BodyCommandeStep %}
 		{% endblock %}
 	</div>

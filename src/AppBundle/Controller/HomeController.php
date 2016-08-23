@@ -90,12 +90,6 @@ class HomeController extends Controller
         return $this->render('ShopBundle:Commande:commandeStep1.html.twig', array(
                 'form' => $form->createView(),
                 'step' => 1,
-                'minititle' => 'Offrir un nounours',
-                'subtext' => 'Vous souhaitez offrir un cadeau original pour votre petite amie ?'
-
-
-                'minititle' => 'Joignez un message à votre cadeau',
-                'subtext' => 'Pensez à signer votre message ou alors gardez l\'anonymat...'
             )
         );
     }
