@@ -87,6 +87,49 @@ class CommandeStepController extends Controller
             )
         );
     }
+
+    public function stepThreeAction(Request $request, $id_commande)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $crypt = $this->container->get('app.crypt');
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
+
+        if (!in_array($commande->getStatus(), array(0, 2))) {
+            return $this->redirectToRoute('shop_commande_step_1');
+        }
+
+        $produit = $commande->getProduit();
+
+        $custom = array(
+            'id_commande' => $id_commande
+        );
+        $info = $this->get('app.info');
+
+        $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
+
+        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br><span style="color: red;font-weight: bolder;">Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€</span><br>Total : ' . $total . '€';
+
+        $returnArray = array(
+            'form' => array(
+                'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
+                'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
+                'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
+                'item_name' => $produit['nom'],
+                'amount' => round(0.90 * $produit['prix'], 2),
+                'lc' => 'FR',
+                'cmd' => '_xclick',
+                'currency_code' => 'EUR',
+                'business' => $this->getParameter('paypal_email'),
+                'tax' => 0,
+                'shipping' => $info->getFraisDeLivraison($commande->getCodePostal()),
+                'no_note' => 1,
+                'custom' => http_build_query($custom)
+                ),
+            'info' => $info_commande,
+        );
+        
+        return $this->render('ShopBundle:Commande:commandeStep2.html.twig');
+    }
 }
 
 
