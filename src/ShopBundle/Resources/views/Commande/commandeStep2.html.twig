@@ -1,0 +1,17 @@
+{% extends 'ShopBundle:Commande:layoutCommandeStep.html.twig' %}
+{% block BodyCommandeStep %}
+	{{ form_start(form, {'attr': {'role': 'form', 'id': 'form'} }) }}
+		<div class="row">
+			<div class="col-sm-12">
+				<label for="{{ form.email.vars.id }}" class="control-label">Votre message</label>
+				{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+			</div>
+		</div>
+		<div class="row marginT30 marginB20 marginT80lg">
+			<div class="col-sm-4 col-sm-offset-4">
+				<button type="submit" id="rent_submit" class="btn btn-block btn-primary">Enregistrer mon message</button>
+			</div>
+		</div>
+		{{ form_rest(form) }}
+	{{ form_end(form) }}
+{% endblock %}
