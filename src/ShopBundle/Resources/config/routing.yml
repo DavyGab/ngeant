@@ -6,6 +6,22 @@ shop_reservation_commande:
     path:     /commande/paiement/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:precommande }
 
+shop_step_2_message:
+    path:     /commande/message/{id_commande}
+    defaults: { _controller: ShopBundle:Reservation:message }
+
+
+shop_commande_step_1:
+    path:     /commandes/nouvelle/{id_commande}
+    defaults: { _controller: ShopBundle:CommandeStep:stepOne }
+
+shop_commande_step_2:
+    path:     /commandes/message/{id_commande}
+    defaults: { _controller: ShopBundle:CommandeStep:stepTwo }
+
+
+
+
 shop_precommande_annulation:
     path:     /reservation/annulation/{id_commande}
     defaults: { _controller: ShopBundle:Reservation:precommandeAnnulation }
@@ -21,7 +37,3 @@ shop_precommande_valide:
 show_commande:
     path:     /rackel
     defaults: { _controller: ShopBundle:Admin:rackel }
-
-shop_step_2_message:
-    path:     /commande/message/{id_commande}
-    defaults: { _controller: ShopBundle:Reservation:message }
