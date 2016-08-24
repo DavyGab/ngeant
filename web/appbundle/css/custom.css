@@ -350,3 +350,7 @@ ul.checkout-bar li.end:after {
 .marginB20 {
     margin-bottom: 20px;
 }
+
+div > textarea.textarea-message {
+  border: 1px solid #00c0ff;
+}

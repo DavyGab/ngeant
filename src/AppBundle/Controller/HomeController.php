@@ -86,11 +86,6 @@ class HomeController extends Controller
             );
         }
 
-        //return $this->render('AppBundle:Home:home.html.twig', $render_array);
-        return $this->render('ShopBundle:Commande:commandeStep1.html.twig', array(
-                'form' => $form->createView(),
-                'step' => 1,
-            )
-        );
+        return $this->render('AppBundle:Home:home.html.twig', $render_array);
     }
 }

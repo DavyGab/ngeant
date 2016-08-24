@@ -23,6 +23,18 @@ shop_commande_step_3:
     path:     /commandes/paiement/{id_commande}
     defaults: { _controller: ShopBundle:CommandeStep:stepThree }
 
+shop_commande_validee:
+    path:     /commandes/paiement/validee/{id_commande}
+    defaults: { _controller: ShopBundle:Paiement:validee }
+
+shop_commande_annulee:
+    path:     /commandes/paiement/annulee/{id_commande}
+    defaults: { _controller: ShopBundle:Paiement:annulee }
+
+shop_commande_paylug:
+    path:     /commandes/paiement/payplug/{id_commande}
+    defaults: { _controller: ShopBundle:Paiement:payplugIPN }
+
 
 
 

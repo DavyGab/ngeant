@@ -1,3 +1,10 @@
 services:
     shop.payplug:
-        class: ShopBundle\Services\Payplug
+        class: ShopBundle\Services\PayplugService
+        arguments:
+            - "%payplug_sandbox%"
+            - "%payplug_key_test%"
+            - "%payplug_key_live%"
+            - "@app.info"
+            - "@app.crypt"
+            - "@router"

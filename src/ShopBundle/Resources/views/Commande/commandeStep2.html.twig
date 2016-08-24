@@ -3,8 +3,8 @@
 	{{ form_start(form, {'attr': {'role': 'form', 'id': 'form'} }) }}
 		<div class="row">
 			<div class="col-sm-12">
-				<label for="{{ form.email.vars.id }}" class="control-label">Votre message</label>
-				{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+				<label for="{{ form.message.vars.id }}" class="control-label">Votre message</label>
+				{{ form_widget(form.message, {'attr': {'class': 'form-control textarea-message', 'placeholder': '', 'rows': '8'}}) }}
 			</div>
 		</div>
 		<div class="row marginT30 marginB20 marginT80lg">
@@ -18,7 +18,7 @@
 
 {% block minititle %}
 	<h3 class="mini_title">Joignez un message à votre cadeau</h3>
-	<p class="subtext">Pensez à signer votre message ou alors gardez l\'anonymat...</p>
+	<p class="subtext">Pensez à signer votre message ou jouez à l'admirateur secret ^^</p>
 {% endblock %}
 
 {% block breadcrumb %}
