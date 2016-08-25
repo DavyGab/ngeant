@@ -31,11 +31,17 @@ $('input[type=radio]').change(function() {
         $('#radio1lab > i').removeClass('fa-square-o');
         $('#radio2lab > i').addClass('fa-square-o');
         $('#radio2lab > i').removeClass('fa-check-square-o');
+
+        $('#img-radio2').removeClass('img-choice');
+        $('#img-radio1').addClass('img-choice');
     }
     else if($(this).val() == "2"){
         $('#radio1lab > i').addClass('fa-square-o');
         $('#radio1lab > i').removeClass('fa-check-square-o');
         $('#radio2lab > i').addClass('fa-check-square-o');
         $('#radio2lab > i').removeClass('fa-square-o');
+
+        $('#img-radio1').removeClass('img-choice');
+        $('#img-radio2').addClass('img-choice');
     }
 });

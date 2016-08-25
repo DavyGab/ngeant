@@ -32,9 +32,7 @@ textarea.textarea-doudou {
     box-shadow: 0px 0px 10px 3px rgba(0, 192, 255, 0.5) inset;
 }
 .section-nounours-choice {
-    background-image: url('../images/back_nounours.jpg');
-    background-repeat: no-repeat;
-    padding-top: 75px;
+    padding-top: 50px;
 }
 #footer {
     padding: 20px 0;
@@ -84,6 +82,7 @@ label {
 
 /* hide input */
 input.radio:empty {
+    margin: 0;
     margin-left: -999999px;
 }
 
@@ -91,7 +90,6 @@ input.radio:empty {
 input.radio:empty ~ label {
     position: relative;
     float: left;
-    margin-top: 2em;
     cursor: pointer;
 }
 
@@ -134,4 +132,9 @@ input.radio:checked ~ label:before {
 #nounours-choice {
     padding-top: 45px;
     padding-bottom: 15px;
+}
+
+.img-choice {
+    border-radius: 15px;
+    border: solid 2px #00c0ff;
 }
