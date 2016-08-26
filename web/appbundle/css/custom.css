@@ -85,6 +85,7 @@ input.radio:empty {
     margin: 0;
     margin-left: -999999px;
     height: 0;
+    margin-left: -999999px;
 }
 
 /* style label */
