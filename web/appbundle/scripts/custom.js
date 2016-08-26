@@ -24,6 +24,13 @@ $('.download-btn').click(function(){
     $('#element-rent-form').show();
 });
 
+$('.img-nounours').click(function() {
+    if($(this).attr('id') == 'img-radio1'){
+        $('#radio1').click();
+    } else if($(this).attr('id') == 'img-radio2'){
+        $('#radio2').click();
+    }
+})
 
 $('input[type=radio]').change(function() {
     if($(this).val() == "1"){

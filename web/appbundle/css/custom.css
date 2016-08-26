@@ -84,6 +84,7 @@ label {
 input.radio:empty {
     margin: 0;
     margin-left: -999999px;
+    height: 0;
 }
 
 /* style label */
@@ -125,7 +126,7 @@ input.radio:checked ~ label:before {
 
 @media (max-width: 767px) {
     .h_btn {
-        height: 0;
+        margin-top: 6em;
     }
 }
 
@@ -134,7 +135,11 @@ input.radio:checked ~ label:before {
     padding-bottom: 15px;
 }
 
-.img-choice {
+.img-nounours {
+    cursor: pointer;
     border-radius: 15px;
+}
+
+.img-choice {
     border: solid 2px #00c0ff;
 }
