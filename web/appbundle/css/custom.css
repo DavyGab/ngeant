@@ -14,23 +14,6 @@
     float: left;
     margin-right: 30px;
 }
-.section-nounours-choice {
-    background-image: url('../images/back_nounours.jpg');
-    background-repeat: no-repeat;
-}
-@media (min-width: 992px) {
-    .section-nounours-choice {
-        background-size: 60%;
-        background-position: 20% 0%;
-        padding: 40px 0;
-    }
-}
-@media (max-width: 670px) {
-    .section-nounours-choice {
-        background-size: 180%;
-        background-position: center center;
-    }
-}
 .img-logo {
     height: 70%;
 }
@@ -47,6 +30,9 @@ textarea.textarea-doudou {
     background-color: white;
     font-style: italic;
     box-shadow: 0px 0px 10px 3px rgba(0, 192, 255, 0.5) inset;
+}
+.section-nounours-choice {
+    padding-top: 50px;
 }
 #footer {
     padding: 20px 0;
@@ -96,6 +82,9 @@ label {
 
 /* hide input */
 input.radio:empty {
+    margin: 0;
+    margin-left: -999999px;
+    height: 0;
     margin-left: -999999px;
 }
 
@@ -103,7 +92,6 @@ input.radio:empty {
 input.radio:empty ~ label {
     position: relative;
     float: left;
-    margin-top: 2em;
     cursor: pointer;
 }
 
@@ -139,6 +127,20 @@ input.radio:checked ~ label:before {
 
 @media (max-width: 767px) {
     .h_btn {
-        height: 0;
+        margin-top: 6em;
     }
+}
+
+#nounours-choice {
+    padding-top: 45px;
+    padding-bottom: 15px;
+}
+
+.img-nounours {
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.img-choice {
+    border: solid 2px #00c0ff;
 }
