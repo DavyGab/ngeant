@@ -34,6 +34,12 @@ textarea.textarea-doudou {
 .section-nounours-choice {
     padding-top: 50px;
 }
+.section-nounours-choice-section2 {
+     background-image: url('../images/back_nounours.jpg');
+     background-repeat: no-repeat;
+     padding-top: 75px;
+  }
+
 #footer {
     padding: 20px 0;
 }
