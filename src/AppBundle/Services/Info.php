@@ -10,7 +10,7 @@ class Info {
     );
 
     protected $produitPrix = array(
-        '1' => 60,
+        '1' => 0,
         '2' => 120
     );
 

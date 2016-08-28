@@ -44,30 +44,6 @@ class HomeController extends Controller
                         'id_commande' => urlencode($crypt->crypt($commande->getId()))
                     ));
                 } else {
-                /*
-                 * Envoi du mail
-                 */
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject('Bénéficiez de l\'offre de réduction !')
-                        ->setFrom(array('hello@bigdoudou.fr' => 'Team Bigdoudou'))
-                        ->setTo($commande->getEmail())
-                        ->addBcc('hello@bigdoudou.fr')
-                        ->setBody(
-                            $this->renderView('ShopBundle:mails:inscription.txt.twig',
-                                array(
-                                    'lien_precommande' => $this->generateUrl('shop_reservation', array(
-                                            'email' => $commande->getEmail(),
-                                            'id_commande' => urlencode($crypt->crypt($commande->getId()))), UrlGeneratorInterface::ABSOLUTE_URL
-                                    )
-                                )
-                            ),
-                            'text/plain'
-                        );
-                    $this->get('mailer')->send($message);
-                    /*
-                     * /Mail
-                     */
-
                     return $this->redirectToRoute('shop_reservation_precommande', array('id_commande' => urlencode($crypt->crypt($commande->getId()))));
                 }
 

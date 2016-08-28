@@ -30,13 +30,13 @@ class ReservationController extends Controller
 
         $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
 
-        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br><span style="color: red;font-weight: bolder;">Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€</span><br>Total : ' . $total . '€';
+        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br><span style="color: red;font-weight: bolder;">Réduction : 10%</span><br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
 
         $returnArray = array(
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
                 'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
-                'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
+                'return' => $this->generateUrl('shop_precommande_valide', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
                 'amount' => round(0.90 * $produit['prix'], 2),
                 'lc' => 'FR',
@@ -65,11 +65,41 @@ L\'équipe BigDoudou';
         return $this->render('ShopBundle:Default:IPNPage.html.twig', $returnArray);
     }
 
-    public function precommandeValidationAction() {
+    public function precommandeValidationAction($id_commande) {
 
         $titre = 'Commande enregistrée';
         $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
         $this->get('session')->getFlashBag()->add($titre, $message);
+        
+        $crypt = $this->container->get('app.crypt');
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
+        
+        /*
+         * Envoi du mail
+         */
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Merci de votre commande !')
+            ->setFrom(array('hello@bigdoudou.fr' => 'Team Bigdoudou'))
+            ->setTo($commande->getEmail())
+            ->addBcc('hello@bigdoudou.fr')
+            ->setBody(
+                $this->renderView('ShopBundle:mails:inscription.txt.twig',
+                    array(
+                        'lien_precommande' => $this->generateUrl('shop_reservation', 
+                            array(
+                                'email' => $commande->getEmail(),
+                                'id_commande' => urlencode($crypt->crypt($commande->getId()))
+                            ), 
+                            UrlGeneratorInterface::ABSOLUTE_URL
+                        )
+                    )
+                ),
+                'text/plain'
+            );
+        $this->get('mailer')->send($message);
+        /*
+         * /Mail
+         */
 
         return $this->forward('AppBundle:Home:indexPrecommande');
     }
@@ -82,7 +112,7 @@ L\'équipe BigDoudou';
         $em->persist($commande);
         $em->flush();
 
-        return $this->redirectToRoute('home_precommande');
+        return $this->redirectToRoute('home');
     }
 
     public function messageAction(Request $request, $id_commande) {
