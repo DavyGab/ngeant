@@ -16,12 +16,7 @@ class PaiementController extends Controller
             ->setSubject('ok')
             ->setFrom('paypal@bigdoudou.fr')
             ->setTo('paypal@bigdoudou.fr')
-            ->setBody(
-                $this->renderView(
-                    'OK'
-                ),
-                'text/plain'
-            );
+            ->setBody('ok');
         $this->get('mailer')->send($message);
 
         $em = $this->getDoctrine()->getManager();
