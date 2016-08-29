@@ -100,8 +100,6 @@ class PaiementController extends Controller
                             $err = 1;
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
-                            $subject = 'Confirmation de votre pré-commande Bigdoudou';
-                            $template = 'ShopBundle:mails:precommande.txt.twig';
                             $commande->setStatus(1);
                             $err = 0;
                         }
@@ -120,6 +118,9 @@ class PaiementController extends Controller
         }
 
         if (!$err || 1) {
+            $subject = 'Confirmation de votre pré-commande Bigdoudou';
+            $template = 'ShopBundle:mails:precommande.txt.twig';
+
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom('paypal'.$e.'@bigdoudou.fr')
