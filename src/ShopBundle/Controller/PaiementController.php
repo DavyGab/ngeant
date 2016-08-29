@@ -117,14 +117,14 @@ class PaiementController extends Controller
             $err = 1;
         }
 
-        if (!$err || 1) {
+        if (!$err) {
             $subject = 'Confirmation de votre pré-commande Bigdoudou';
             $template = 'ShopBundle:mails:precommande.txt.twig';
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom('paypal'.$e.'@bigdoudou.fr')
-                ->setTo($email)
+                ->setTo($payer_email)
                 ->addBcc('paypal@bigdoudou.fr')
                 ->setBody(
                     $this->renderView(
