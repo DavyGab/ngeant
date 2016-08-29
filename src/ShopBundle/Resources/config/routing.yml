@@ -15,7 +15,7 @@ shop_ipn_notification:
     defaults: { _controller: ShopBundle:Paiement:IpnNotification }
 
 shop_precommande_valide:
-    path:     /reservation/success/{id_commande}
+    path:     /reservation/success
     defaults: { _controller: ShopBundle:Reservation:precommandeValidation }
 
 show_commande:
