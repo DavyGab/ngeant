@@ -11,6 +11,8 @@ class PaiementController extends Controller
 {
     public function IpnNotificationAction(Request $request)
     {
+        $log = $this->get('logger');
+        $log->info('IPN NOTIFICATION');
         $e = 0;
         $url = 'https://www.paypal.com/cgi-bin/webscr';
         $message = \Swift_Message::newInstance()
@@ -40,7 +42,6 @@ class PaiementController extends Controller
         $status   = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
-            $log = $this->get('logger');
 
         $payment_status = $request->request->get('payment_status');
         $payment_amount = $request->request->get('mc_gross');
