@@ -65,41 +65,11 @@ L\'équipe BigDoudou';
         return $this->render('ShopBundle:Default:IPNPage.html.twig', $returnArray);
     }
 
-    public function precommandeValidationAction($id_commande) {
+    public function precommandeValidationAction() {
 
         $titre = 'Commande enregistrée';
         $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
         $this->get('session')->getFlashBag()->add($titre, $message);
-        
-        $crypt = $this->container->get('app.crypt');
-        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
-        
-        /*
-         * Envoi du mail
-         */
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Merci de votre commande !')
-            ->setFrom(array('hello@bigdoudou.fr' => 'Team Bigdoudou'))
-            ->setTo($commande->getEmail())
-            ->addBcc('hello@bigdoudou.fr')
-            ->setBody(
-                $this->renderView('ShopBundle:mails:inscription.txt.twig',
-                    array(
-                        'lien_precommande' => $this->generateUrl('shop_reservation', 
-                            array(
-                                'email' => $commande->getEmail(),
-                                'id_commande' => urlencode($crypt->crypt($commande->getId()))
-                            ), 
-                            UrlGeneratorInterface::ABSOLUTE_URL
-                        )
-                    )
-                ),
-                'text/plain'
-            );
-        $this->get('mailer')->send($message);
-        /*
-         * /Mail
-         */
 
         return $this->redirectToRoute('home');
     }
