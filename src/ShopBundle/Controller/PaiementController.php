@@ -12,6 +12,17 @@ class PaiementController extends Controller
     public function IpnNotificationAction(Request $request)
     {
         $url = 'https://www.paypal.com/cgi-bin/webscr';
+        $message = \Swift_Message::newInstance()
+            ->setSubject('ok')
+            ->setFrom('paypal@bigdoudou.fr')
+            ->setTo('paypal@bigdoudou.fr')
+            ->setBody(
+                $this->renderView(
+                    'OK'
+                ),
+                'text/plain'
+            );
+        $this->get('mailer')->send($message);
 
         $em = $this->getDoctrine()->getManager();
 
