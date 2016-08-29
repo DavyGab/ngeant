@@ -36,7 +36,7 @@ class ReservationController extends Controller
             'form' => array(
                 'cancel_return' => $this->generateUrl('shop_precommande_annulation', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
                 'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
-                'return' => $this->generateUrl('shop_precommande_valide', array('id_commande' => $id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
+                'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
                 'amount' => round(0.90 * $produit['prix'], 2),
                 'lc' => 'FR',
