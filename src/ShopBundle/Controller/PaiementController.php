@@ -108,7 +108,7 @@ class PaiementController extends Controller
             $err = 1;
         }
 
-        if ($err) {
+        if (!$err) {
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom('paypal@bigdoudou.fr')
