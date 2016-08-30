@@ -28,6 +28,7 @@ class HomeController extends Controller
                     'prix' => 0,9 * $info->getPrixProduit($commande->getProduit())
                 )
             );
+            dump(0,9 * $info->getPrixProduit($commande->getProduit()));
             $em->persist($commande);
             $em->flush();
 

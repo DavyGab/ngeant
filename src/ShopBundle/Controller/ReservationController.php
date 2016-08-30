@@ -29,6 +29,7 @@ class ReservationController extends Controller
         $info = $this->get('app.info');
 
         $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
+        dump(round(0.90 * $produit['prix'], 2));
 
         $info_commande = 'Nounours : ' . $produit['prix'] . '€<br><span style="color: red;font-weight: bolder;">Réduction : 10%</span><br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
 
