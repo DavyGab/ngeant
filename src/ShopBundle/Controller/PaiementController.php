@@ -13,15 +13,8 @@ class PaiementController extends Controller
     {
         $log = $this->get('logger');
         $log->info('IPN NOTIFICATION');
-        $e = 0;
-        $url = 'https://www.paypal.com/cgi-bin/webscr';
-        $message = \Swift_Message::newInstance()
-            ->setSubject($e)
-            ->setFrom('hello@bigdoudou.fr')
-            ->setTo('paypal@bigdoudou.fr')
-            ->setBody('ok');
-        $this->get('mailer')->send($message);
 
+        $url = 'https://www.paypal.com/cgi-bin/webscr';
         $em = $this->getDoctrine()->getManager();
 
         $paypal = new PaypalInfo();
@@ -50,15 +43,6 @@ class PaiementController extends Controller
 
         if($status == 200 && $response == 'VERIFIED')
         {
-            $e = 1;
-
-            $message = \Swift_Message::newInstance()
-                ->setSubject($e)
-                ->setFrom('hello@bigdoudou.fr')
-                ->setTo('paypal@bigdoudou.fr')
-                ->setBody('ok');
-            $this->get('mailer')->send($message);
-
             $log->info('Paiement reçu.');
             $email_account = $this->getParameter('receiver_email');
 
@@ -67,17 +51,6 @@ class PaiementController extends Controller
             if ( $payment_status == "Completed") {
                 //Vérifie que le paiement est OK
                 $log->info('Paiement complété de '. $payer_email);
-                $e = 2;
-
-
-                $message = \Swift_Message::newInstance()
-                    ->setSubject($e)
-                    ->setFrom('hello@bigdoudou.fr')
-                    ->setTo('paypal@bigdoudou.fr')
-                    ->setBody('ok');
-                $this->get('mailer')->send($message);
-
-
 
                 if ($email_account == $receiver_email) {
                     //Vérifie que nous avons vien recu l'argent
@@ -107,16 +80,6 @@ class PaiementController extends Controller
                     $commande->setPaypalInfo($_POST);
 
                     $log->info('Paiement complété de '. $payer_email);
-                    $e = 3;
-
-
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject($e)
-                        ->setFrom('hello@bigdoudou.fr')
-                        ->setTo('paypal@bigdoudou.fr')
-                        ->setBody('ok');
-                    $this->get('mailer')->send($message);
-
 
                     $produit = $commande->getProduit();
                     // Si la commande a déja été payé...
@@ -130,10 +93,9 @@ class PaiementController extends Controller
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
                             $commande->setStatus(1);
-                            $err = 1;
+                            $err = 0;
                         }
                     }
-                    $e = 4;
                     $em->persist($commande);
                 }
             }
@@ -142,29 +104,9 @@ class PaiementController extends Controller
                 $err = 1;
             }
 
-
-            $message = \Swift_Message::newInstance()
-                ->setSubject($e)
-                ->setFrom('hello@bigdoudou.fr')
-                ->setTo('paypal@bigdoudou.fr')
-                ->setBody('ok');
-            $this->get('mailer')->send($message);
-
-
-
         } else {
             $log->info('Erreur lors de la validation dune commande');
             $err = 1;
-
-            $message = \Swift_Message::newInstance()
-                ->setSubject($e)
-                ->setFrom('hello@bigdoudou.fr')
-                ->setTo('paypal@bigdoudou.fr')
-                ->setBody('ok');
-            $this->get('mailer')->send($message);
-
-
-            
         }
 
         if (!$err) {
@@ -173,7 +115,7 @@ class PaiementController extends Controller
 
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom('paypal'.$e.'@bigdoudou.fr')
+                ->setFrom(array('hello@bigdoudou.fr' => 'TeamBigdoudou'))
                 ->setTo($payer_email)
                 ->addBcc('paypal@bigdoudou.fr')
                 ->setBody(
