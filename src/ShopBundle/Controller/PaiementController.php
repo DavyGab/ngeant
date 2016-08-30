@@ -41,6 +41,8 @@ class PaiementController extends Controller
         $receiver_email = $request->request->get('receiver_email');
         $payer_email = $request->request->get('payer_email');
 
+        $err = 1;
+
         if($status == 200 && $response == 'VERIFIED')
         {
             $log->info('Paiement reçu.');
@@ -85,11 +87,9 @@ class PaiementController extends Controller
                     // Si la commande a déja été payé...
                     if ($commande->getStatus() != 0) {
                         $log->info('Le paiement recu  de '. $payer_email .' correspond a une commande déjà payée');
-                        $err = 1;
                     } else {
                         if ($payment_amount != $produit['prix']) {
                             $log->info('Le paiement recu  de '. $payer_email .' est diffrent de la commande correspondante');
-                            $err = 1;
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
                             $commande->setStatus(1);
@@ -101,12 +101,10 @@ class PaiementController extends Controller
             }
             else {
                 $log->info('Paiement echec.');
-                $err = 1;
             }
 
         } else {
             $log->info('Erreur lors de la validation dune commande');
-            $err = 1;
         }
 
         if (!$err) {
