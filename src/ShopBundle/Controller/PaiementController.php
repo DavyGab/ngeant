@@ -16,7 +16,7 @@ class PaiementController extends Controller
         $e = 0;
         $url = 'https://www.paypal.com/cgi-bin/webscr';
         $message = \Swift_Message::newInstance()
-            ->setSubject('ok')
+            ->setSubject($e)
             ->setFrom('hello@bigdoudou.fr')
             ->setTo('paypal@bigdoudou.fr')
             ->setBody('ok');
@@ -51,6 +51,14 @@ class PaiementController extends Controller
         if($status == 200 && $response == 'VERIFIED')
         {
             $e = 1;
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($e)
+                ->setFrom('hello@bigdoudou.fr')
+                ->setTo('paypal@bigdoudou.fr')
+                ->setBody('ok');
+            $this->get('mailer')->send($message);
+
             $log->info('Paiement reçu.');
             $email_account = $this->getParameter('receiver_email');
 
@@ -60,6 +68,17 @@ class PaiementController extends Controller
                 //Vérifie que le paiement est OK
                 $log->info('Paiement complété de '. $payer_email);
                 $e = 2;
+
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject($e)
+                    ->setFrom('hello@bigdoudou.fr')
+                    ->setTo('paypal@bigdoudou.fr')
+                    ->setBody('ok');
+                $this->get('mailer')->send($message);
+
+
+
                 if ($email_account == $receiver_email) {
                     //Vérifie que nous avons vien recu l'argent
                     $log->info('Paiement bien recu de '. $payer_email);
@@ -90,6 +109,15 @@ class PaiementController extends Controller
                     $log->info('Paiement complété de '. $payer_email);
                     $e = 3;
 
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject($e)
+                        ->setFrom('hello@bigdoudou.fr')
+                        ->setTo('paypal@bigdoudou.fr')
+                        ->setBody('ok');
+                    $this->get('mailer')->send($message);
+
+
                     $produit = $commande->getProduit();
                     // Si la commande a déja été payé...
                     if ($commande->getStatus() != 0) {
@@ -102,7 +130,7 @@ class PaiementController extends Controller
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
                             $commande->setStatus(1);
-                            $err = 0;
+                            $err = 1;
                         }
                     }
                     $e = 4;
@@ -113,9 +141,30 @@ class PaiementController extends Controller
                 $log->info('Paiement echec.');
                 $err = 1;
             }
+
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($e)
+                ->setFrom('hello@bigdoudou.fr')
+                ->setTo('paypal@bigdoudou.fr')
+                ->setBody('ok');
+            $this->get('mailer')->send($message);
+
+
+
         } else {
             $log->info('Erreur lors de la validation dune commande');
             $err = 1;
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($e)
+                ->setFrom('hello@bigdoudou.fr')
+                ->setTo('paypal@bigdoudou.fr')
+                ->setBody('ok');
+            $this->get('mailer')->send($message);
+
+
+            
         }
 
         if (!$err) {
