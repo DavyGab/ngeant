@@ -83,13 +83,15 @@ class PaiementController extends Controller
 
                     $log->info('Paiement complété de '. $payer_email);
 
+                    $info = $this->get('app.info');
+
                     $produit = $commande->getProduit();
                     // Si la commande a déja été payé...
                     if ($commande->getStatus() != 0) {
                         $log->info('Le paiement recu  de '. $payer_email .' correspond a une commande déjà payée');
                     } else {
-                        if ($payment_amount != $produit['prix']) {
-                            $log->info('Le paiement recu  de '. $payer_email .' est diffrent de la commande correspondante');
+                        if ($payment_amount != ($info->getPrixAvecPromo($produit['id'])) + $info->getFraisDeLivraison($commande->getCodePostal())) {
+                            $log->info('Le paiement recu  de '. $payer_email .' est different de la commande correspondante');
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
                             $commande->setStatus(1);
