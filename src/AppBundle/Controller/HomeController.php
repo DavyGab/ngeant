@@ -25,7 +25,7 @@ class HomeController extends Controller
             $commande->setProduit(array(
                     'id' => $commande->getProduit(),
                     'nom' => $info->getNomProduit($commande->getProduit()),
-                    'prix' => $info->getPrixProduit($commande->getProduit())
+                    'prix' => 0,9 * $info->getPrixProduit($commande->getProduit())
                 )
             );
             $em->persist($commande);
