@@ -9,7 +9,8 @@ class AdminController extends Controller
 {
     public function rackelAction(Request $request) {
         $password = $request->request->get('password');
-        if ($password == 'alexisdavy123!') {
+        $pass = $this->getParameter('admin_pass');
+        if ($password == $pass) {
             return $this->forward('ShopBundle:Admin:showCommande');
         }
 
