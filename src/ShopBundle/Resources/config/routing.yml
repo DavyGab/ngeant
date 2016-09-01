@@ -1,54 +1,32 @@
-shop_reservation_precommande:
-    path:     /precommande/paiement/{id_commande}
-    defaults: { _controller: ShopBundle:Reservation:precommande }
-
-shop_reservation_commande:
-    path:     /commande/paiement/{id_commande}
-    defaults: { _controller: ShopBundle:Reservation:precommande }
-
-shop_step_2_message:
-    path:     /commande/message/{id_commande}
-    defaults: { _controller: ShopBundle:Reservation:message }
-
-
+# Etape 1 : mail et code postal
 shop_commande_step_1:
-    path:     /commandes/nouvelle
+    path:     /commande/nouvelle
     defaults: { _controller: ShopBundle:CommandeStep:stepOne }
-
+# Etape 2 : Message
 shop_commande_step_2:
-    path:     /commandes/message/{id_commande}
+    path:     /commande/message/{id_commande}
     defaults: { _controller: ShopBundle:CommandeStep:stepTwo }
-
+# Etape 3 : Recapitulatif
 shop_commande_step_3:
-    path:     /commandes/paiement/{id_commande}
+    path:     /commande/paiement/{id_commande}
     defaults: { _controller: ShopBundle:CommandeStep:stepThree }
 
+# Commande validée -> redirection
 shop_commande_validee:
-    path:     /commandes/paiement/validee/{id_commande}
+    path:     /commande/paiement/validee/{id_commande}
     defaults: { _controller: ShopBundle:Paiement:validee }
-
+# Commande annulée -> redirection
 shop_commande_annulee:
-    path:     /commandes/paiement/annulee/{id_commande}
+    path:     /commande/paiement/annulee/{id_commande}
     defaults: { _controller: ShopBundle:Paiement:annulee }
-
+# Notification IPN PayPlug
 shop_commande_paylug:
-    path:     /commandes/paiement/payplug/{id_commande}
+    path:     /commande/paiement/payplug/{id_commande}
     defaults: { _controller: ShopBundle:Paiement:payplugIPN }
-
-
-
-
-shop_precommande_annulation:
-    path:     /reservation/annulation/{id_commande}
-    defaults: { _controller: ShopBundle:Reservation:precommandeAnnulation }
-
+# Notification IPN PayPal
 shop_ipn_notification:
     path:     /paypal/ipn
     defaults: { _controller: ShopBundle:Paiement:IpnNotification }
-
-shop_precommande_valide:
-    path:     /reservation/success
-    defaults: { _controller: ShopBundle:Reservation:precommandeValidation }
 
 show_commande:
     path:     /rackel

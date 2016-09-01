@@ -28,9 +28,9 @@ class ReservationController extends Controller
         );
         $info = $this->get('app.info');
 
-        $total = round(0.90 * $produit['prix'], 2) + $info->getFraisDeLivraison($commande->getCodePostal());
+        $total = $info->getPrixAvecPromo($produit['id']) + $info->getFraisDeLivraison($commande->getCodePostal());
 
-        $info_commande = 'Nounours : ' . $produit['prix'] . '€<br>Réduction : 10%<br><span style="color: red;font-weight: bolder;">Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€</span><br>Total : ' . $total . '€';
+        $info_commande = 'Nounours : ' . $info->getPrixProduit($produit['id']) . '€<br><span style="color: red;font-weight: bolder;">Réduction : 10%</span><br>Livraison : ' . $info->getFraisDeLivraison($commande->getCodePostal()) . '€<br>Total : ' . $total . '€';
 
         $returnArray = array(
             'form' => array(
@@ -38,7 +38,7 @@ class ReservationController extends Controller
                 'notify_url' => $this->generateUrl('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'return' => $this->generateUrl('shop_precommande_valide', array(), UrlGeneratorInterface::ABSOLUTE_URL),
                 'item_name' => $produit['nom'],
-                'amount' => round(0.90 * $produit['prix'], 2),
+                'amount' => $info->getPrixAvecPromo($produit['id']),
                 'lc' => 'FR',
                 'cmd' => '_xclick',
                 'currency_code' => 'EUR',
@@ -71,7 +71,7 @@ L\'équipe BigDoudou';
         $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
         $this->get('session')->getFlashBag()->add($titre, $message);
 
-        return $this->forward('AppBundle:Home:indexPrecommande');
+        return $this->redirectToRoute('home');
     }
 
     public function precommandeAnnulationAction($id_commande) {
@@ -82,7 +82,7 @@ L\'équipe BigDoudou';
         $em->persist($commande);
         $em->flush();
 
-        return $this->redirectToRoute('home_precommande');
+        return $this->redirectToRoute('home');
     }
 
     public function messageAction(Request $request, $id_commande) {

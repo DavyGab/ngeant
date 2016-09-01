@@ -11,8 +11,10 @@ class PaiementController extends Controller
 {
     public function IpnNotificationAction(Request $request)
     {
-        $url = 'https://www.paypal.com/cgi-bin/webscr';
+        $log = $this->get('logger');
+        $log->info('IPN NOTIFICATION');
 
+        $url = 'https://www.paypal.com/cgi-bin/webscr';
         $em = $this->getDoctrine()->getManager();
 
         $paypal = new PaypalInfo();
@@ -33,12 +35,13 @@ class PaiementController extends Controller
         $status   = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
-            $log = $this->get('logger');
 
         $payment_status = $request->request->get('payment_status');
         $payment_amount = $request->request->get('mc_gross');
         $receiver_email = $request->request->get('receiver_email');
         $payer_email = $request->request->get('payer_email');
+
+        $err = 1;
 
         if($status == 200 && $response == 'VERIFIED')
         {
@@ -50,6 +53,7 @@ class PaiementController extends Controller
             if ( $payment_status == "Completed") {
                 //Vérifie que le paiement est OK
                 $log->info('Paiement complété de '. $payer_email);
+
                 if ($email_account == $receiver_email) {
                     //Vérifie que nous avons vien recu l'argent
                     $log->info('Paiement bien recu de '. $payer_email);
@@ -63,8 +67,7 @@ class PaiementController extends Controller
                         $message = \Swift_Message::newInstance()
                             ->setSubject($subject)
                             ->setFrom('paypal@bigdoudou.fr')
-                            ->setTo($commande->getEmail())
-                            ->addBcc('paypal@bigdoudou.fr')
+                            ->setTo('paypal@bigdoudou.fr')
                             ->setBody(
                                 $this->renderView(
                                     $template
@@ -80,53 +83,49 @@ class PaiementController extends Controller
 
                     $log->info('Paiement complété de '. $payer_email);
 
+                    $info = $this->get('app.info');
+
                     $produit = $commande->getProduit();
                     // Si la commande a déja été payé...
                     if ($commande->getStatus() != 0) {
                         $log->info('Le paiement recu  de '. $payer_email .' correspond a une commande déjà payée');
-                        $subject = 'Erreur lors du paiement de votre commande';
-                        $template = 'ShopBundle:mails:erreur_precommande.txt.twig';
                     } else {
-                        if ($payment_amount != $produit['prix']) {
-                            $log->info('Le paiement recu  de '. $payer_email .' est diffrent de la commande correspondante');
-                            $subject = 'Erreur lors du paiement de votre commande';
-                            $template = 'ShopBundle:mails:erreur_precommande.txt.twig';
+                        if ($payment_amount != ($info->getPrixAvecPromo($produit['id'])) + $info->getFraisDeLivraison($commande->getCodePostal())) {
+                            $log->info('Le paiement recu  de '. $payer_email .' est different de la commande correspondante');
                         } else {
                             $log->info('Le paiement recu  de '. $payer_email .' correspond à la commande '. $commande->getId() . ' et a été payé.');
-                            $subject = 'Confirmation de votre pré-commande Bigdoudou';
-                            $template = 'ShopBundle:mails:precommande.txt.twig';
                             $commande->setStatus(1);
+                            $err = 0;
                         }
                     }
-
                     $em->persist($commande);
                 }
             }
             else {
                 $log->info('Paiement echec.');
-                $subject = 'Erreur lors du paiement de votre commande';
-                $template = 'ShopBundle:mails:erreur_precommande.txt.twig';
             }
+
         } else {
             $log->info('Erreur lors de la validation dune commande');
-            $subject = 'Erreur lors du paiement de votre commande';
-            $template = 'ShopBundle:mails:erreur_precommande.txt.twig';
         }
 
+        if (!$err) {
+            $subject = 'Confirmation de votre pré-commande Bigdoudou';
+            $template = 'ShopBundle:mails:precommande.txt.twig';
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom('paypal@bigdoudou.fr')
-            ->setTo($email)
-            ->addBcc('paypal@bigdoudou.fr')
-            ->setBody(
-                $this->renderView(
-                    $template
-                ),
-                'text/plain'
-            )
-        ;
-        $this->get('mailer')->send($message);
+            $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom(array('hello@bigdoudou.fr' => 'TeamBigdoudou'))
+                ->setTo($payer_email)
+                ->addBcc('paypal@bigdoudou.fr')
+                ->setBody(
+                    $this->renderView(
+                        $template
+                    ),
+                    'text/plain'
+                );
+            $this->get('mailer')->send($message);
+        }
 
         $em->flush();
         return new Response();

@@ -98,4 +98,9 @@ class Info {
     public function getStatus() {
         return $this->status;
     }
+
+    public function getPrixAvecPromo($id) {
+        return $this->produitPrix[$id] * 0.9;
+    }
+
 } 

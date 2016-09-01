@@ -15,15 +15,15 @@
 			<div class="form-group">
 				<div class="col-sm-12">
 					<label for="radio1" class="control-label">Choisissez la taille du BigDoudou *</label>
+					<div class="col-sm-6 h_btn">
+						<input type="radio" name="radio" id="radio1" class="radio" value="1" checked/>
+						<label for="radio1" id="radio1lab" class="download-btn text-center"><i class="fa fa-check-square-o" data-selector=".icon"></i>GRAND NOUNOURS (1m)</label>
+					</div>
+					<div class="col-sm-6 h_btn">
+						<input type="radio" name="radio" id="radio2" class="radio" value="2"/>
+						<label for="radio2" id="radio2lab" class="download-btn text-center"><i class="fa fa-square-o" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)</label>
+					</div>
 				</div>
-				<div class="col-sm-6 h_btn">
-                    <input type="radio" name="radio" id="radio1" class="radio" value="1" checked/>
-                    <label for="radio1" id="radio1lab" class="download-btn text-center"><i class="fa fa-check-square-o" data-selector=".icon"></i>GRAND NOUNOURS (1m)</label>
-	            </div>
-				<div class="col-sm-6 h_btn">
-                    <input type="radio" name="radio" id="radio2" class="radio" value="2"/>
-                    <label for="radio2" id="radio2lab" class="download-btn text-center"><i class="fa fa-square-o" data-selector=".icon"></i>NOUNOURS GEANT (1.5m)</label>
-	            </div>
             </div>
 		</div>
 		<div class="row marginT30 marginB20 marginT80lg">
@@ -55,4 +55,13 @@
 			</ul>
 		</div>
 	</div>
+{% endblock %}
+{%  block flashBag %}
+	{% for type, messages in app.session.flashBag.all %}
+		{% for message in messages %}
+			<p class="col-md-12 bg-{{ type }}">
+				{{ message|raw }}
+			</p>
+		{% endfor %}
+	{% endfor %}
 {% endblock %}

@@ -36,6 +36,15 @@ textarea.textarea-doudou {
     font-style: italic;
     box-shadow: 0px 0px 10px 3px rgba(0, 192, 255, 0.5) inset;
 }
+.section-nounours-choice {
+    padding-top: 50px;
+}
+.section-nounours-choice-section2 {
+     background-image: url('../images/back_nounours.jpg');
+     background-repeat: no-repeat;
+     padding-top: 75px;
+  }
+
 #footer {
     padding: 20px 0;
     margin-top: 50px;
@@ -93,6 +102,9 @@ label {
 
 /* hide input */
 input.radio:empty {
+    margin: 0;
+    margin-left: -999999px;
+    height: 0;
     margin-left: -999999px;
     height: 1px;
 }
@@ -135,12 +147,6 @@ input.radio:checked ~ label:before {
     position: absolute;
     top: 8px;
     left: 18px;
-}
-
-@media (max-width: 767px) {
-    .h_btn {
-        height: 0;
-    }
 }
 
 #nounours-choice {
@@ -251,8 +257,8 @@ ul.checkout-bar {
   -webkit-animation: myanimation 3s 0;
   background-size: 35px 35px;
   background-color: #8bc53f;
-  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
   -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   content: "";
@@ -269,8 +275,8 @@ ul.checkout-bar {
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   background-size: 35px 35px;
   background-color: #EcEcEc;
-  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(315deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
   border-radius: 15px;
   height: 15px;
   margin: 0 auto;
@@ -281,8 +287,8 @@ ul.checkout-bar {
 ul.checkout-bar:before {
   background-size: 35px 35px;
   background-color: #57aed1;
-  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
   -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
@@ -314,8 +320,8 @@ ul.checkout-bar li.visited {
 ul.checkout-bar li.visited:after {
   background-size: 35px 35px;
   background-color: #57aed1;
-  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(315deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
   -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
   content: "";
@@ -353,4 +359,21 @@ ul.checkout-bar li.end:after {
 
 div > textarea.textarea-message {
   border: 1px solid #00c0ff;
+}
+
+.img-nounours {
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.img-choice {
+    border: solid 2px #00c0ff;
+}
+
+.bg-danger {
+    border-radius: 5px;
+    color: #b64d4d;
+    border: 1px solid #efbdbd;
+    padding: 8px 23px;
+    font-size: 0.9em;
 }
