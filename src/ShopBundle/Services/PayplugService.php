@@ -35,7 +35,10 @@ class PayplugService {
     public function createPayment($commande) {
         $payment = \Payplug\Payment::create($this->convertCommandeToArray($commande));
 
-        return $payment->hosted_payment->payment_url;
+        return array(
+            'url' => $payment->hosted_payment->payment_url,
+            'info' => $payment
+            );
     }
 
     private function convertCommandeToArray($commande) {

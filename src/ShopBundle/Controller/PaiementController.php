@@ -130,4 +130,8 @@ class PaiementController extends Controller
         $em->flush();
         return new Response();
     }
+
+    public function payplugIPN(Request $request) {
+        
+    }
 }

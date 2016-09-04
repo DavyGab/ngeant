@@ -94,9 +94,14 @@ class CommandeStepController extends Controller
         $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
 
         $payplug = $this->container->get('shop.payplug');
-        $urlPaiementPayplug = $payplug->createPayment($commande);
+        $paiementPayplug = $payplug->createPayment($commande);
 
-        return $this->redirect($urlPaiementPayplug);
+        $em = $this->getDoctrine()->getManager();
+        $payplug = new PaypalInfo();
+        $payplug->setInfo($paiementPayplug);
+        $em->persist($payplug);
+
+        return $this->redirect($paiementPayplug['url']);
     }
 }
 
