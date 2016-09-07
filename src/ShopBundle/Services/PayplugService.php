@@ -36,9 +36,6 @@ class PayplugService {
     public function createPayment($commande) {
         $payment = \Payplug\Payment::create($this->convertCommandeToArray($commande));
 
-        $commande->setPaiementId($payment->id);
-        $em->persist($commande);
-
         return array(
             'url' => $payment->hosted_payment->payment_url,
             'info' => $payment

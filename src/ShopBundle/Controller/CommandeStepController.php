@@ -96,19 +96,22 @@ class CommandeStepController extends Controller
 
         $payplug = $this->container->get('shop.payplug');
         $paiementPayplug = $payplug->createPayment($commande);
+        $commande->setPaiementId($paiementPayplug['info']->id);
 
         $em = $this->getDoctrine()->getManager();
         $payplug = new PaypalInfo();
         $payplug->setInfo($paiementPayplug);
-        $em->persist($payplug);
+        $urlPayplug = $paiementPayplug['url'];
 
         $paypal = $this->get('shop.paypal');
         $formPaypal = $paypal->createForm($commande);
-        $urlPayplug = $paiementPayplug['url'];
 
         $info = $this->get('app.info');
         $produit = $commande->getProduit();
 
+        $em->persist($payplug);
+        $em->persist($commande);
+        $em->flush();
 
         return $this->render('ShopBundle:Commande:commandeStep3.html.twig', array(
                 'nounours_prix' => $info->getPrixProduit($produit['id']),
