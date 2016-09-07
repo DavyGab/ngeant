@@ -19,3 +19,5 @@ parameters:
     payplug_key_test: ~
     payplug_key_live: ~
     payplug_sandbox: ~
+
+    admin_pass: ~
