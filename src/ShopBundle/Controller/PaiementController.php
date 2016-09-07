@@ -146,7 +146,27 @@ class PaiementController extends Controller
             $commande->setStatus(3);
             $em->persist($commande);
             $em->flush();
+
+            $subject = 'Confirmation de votre pré-commande Bigdoudou';
+            $template = 'ShopBundle:mails:precommande.txt.twig';
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom(array('hello@bigdoudou.fr' => 'TeamBigdoudou'))
+                ->setTo($commande->getEmail())
+                ->addBcc('paypal@bigdoudou.fr')
+                ->setBody(
+                    $this->renderView(
+                        $template
+                    ),
+                    'text/plain'
+                );
+            $this->get('mailer')->send($message);
+
+            return true;
         }
+
+        return false;
     }
     
     public function valideeAction() {
