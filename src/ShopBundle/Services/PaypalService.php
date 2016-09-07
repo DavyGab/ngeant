@@ -25,14 +25,14 @@ class PaypalService {
     public function createForm($commande) {
 
         $produit = $commande->getProduit();
-        $crypt_id_commande = $this->crypt->crypt(urldecode($commande->getId()));
+        $crypt_id_commande = urldecode($this->crypt->crypt($commande->getId()));
         $custom = array(
-            'id_commande' => $this->crypt->crypt(urldecode($commande->getId()))
+            'id_commande' => $crypt_id_commande
         );
         return array(
             'cancel_return' => $this->router->generate('shop_commande_annulee', array('id_commande' => $crypt_id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
             'notify_url' => $this->router->generate('shop_ipn_notification', array(), UrlGeneratorInterface::ABSOLUTE_URL),
-            'return' => $this->router->generate('shop_commande_validee', array('id_commande' => $crypt_id_commande), UrlGeneratorInterface::ABSOLUTE_URL),
+            'return' => $this->router->generate('shop_commande_validee', array(), UrlGeneratorInterface::ABSOLUTE_URL),
             'item_name' => $produit['nom'],
             'amount' => $this->info->getPrixAvecPromo($produit['id']),
             'lc' => 'FR',

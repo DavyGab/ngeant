@@ -2,7 +2,7 @@
     position: absolute;
     top: 50%;
 }
-.download-btn {
+.download-btn.download-btn-2 {
     cursor: pointer;
     background-color: rgba(0, 192, 255, 1);
     color: white;
@@ -14,6 +14,14 @@
     font-weight: bold;
     font-size: 0.9em;
 }
+.download-btn {
+    cursor: pointer;
+    background-color: rgba(0, 192, 255, 1);
+    color: white;
+    width: 100%;
+    padding-left: 90px
+}
+
 .img-step{
     width: 58px;
     float: left;
@@ -49,6 +57,13 @@ textarea.textarea-doudou {
     padding: 20px 0;
     margin-top: 50px;
 }
+
+@media (max-width: 767px) {
+    .h_btn {
+        margin-top: 6em;
+    }
+}
+
 
 @media (max-width: 992px) {
     .promo_span {
@@ -105,8 +120,6 @@ input.radio:empty {
     margin: 0;
     margin-left: -999999px;
     height: 0;
-    margin-left: -999999px;
-    height: 1px;
 }
 
 /* style label */
@@ -124,9 +137,13 @@ input.radio:empty ~ label:before {
     font-size: 2em;
     left: 0;
     content: '';
-    width: 2em;
+    width: 3em;
     background: rgb(222, 222, 222);
     border-radius: 3px 0 0 3px;
+}
+
+input.radio:empty ~ label.download-btn-2:before {
+    width: 2em;
 }
 
 /* toggle hover */
@@ -136,13 +153,21 @@ input.radio:hover:not(:checked) ~ label {
 }
 
 /* toggle on */
-input.radio ~ label:before {
+input.radio ~ label.download-btn-2:before {
     height: 43px;
 }
 input.radio:checked ~ label:before {
     background-color: #9CE2AE;
 }
+
 .download-btn .fa {
+    font-size: 40px;
+    position: absolute;
+    top: 17px;
+    left: 23px;
+}
+
+.download-btn-2 .fa {
     font-size: 30px;
     position: absolute;
     top: 8px;

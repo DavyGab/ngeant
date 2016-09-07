@@ -11,7 +11,7 @@ services:
     shop.paypal:
         class: ShopBundle\Services\PaypalService
         arguments:
-            - "%paypal_email"
+            - "%paypal_email%"
             - "@app.info"
             - "@app.crypt"
             - "@router"

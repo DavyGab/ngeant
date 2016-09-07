@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Services;
 
+use ShopBundle\Entity\Commande;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PayplugService {
@@ -61,5 +62,11 @@ class PayplugService {
                 'commande_id'       => $commande->getId()
             )
         );
+    }
+    
+    public function retrievePaiement(Commande $commande) {
+        $payment_id = $commande->getPaiementId();
+        
+        return \Payplug\Payment::retrieve($payment_id);
     }
 } 

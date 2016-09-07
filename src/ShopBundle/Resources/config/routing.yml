@@ -13,7 +13,7 @@ shop_commande_step_3:
 
 # Commande validée -> redirection
 shop_commande_validee:
-    path:     /commande/paiement/validee/{id_commande}
+    path:     /commande/paiement/validee/
     defaults: { _controller: ShopBundle:Paiement:validee }
 # Commande annulée -> redirection
 shop_commande_annulee:

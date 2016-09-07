@@ -131,7 +131,37 @@ class PaiementController extends Controller
         return new Response();
     }
 
-    public function payplugIPN(Request $request) {
-        
+    public function payplugIPNAction($id_commande) {
+        $em = $this->getDoctrine()->getManager();
+        $crypt = $this->container->get('app.crypt');
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
+
+        $payplug = $this->get('shop.payplug');
+        $paiement = $payplug->retrievePaiement($commande);
+
+        if ($paiement['object'] == 'payment' && $paiement['is_paid']) {
+            $commande->setStatus(3);
+            $em->persist($commande);
+            $em->flush();
+        }
+    }
+    
+    public function valideeAction() {
+        $titre = 'Commande enregistrée';
+        $message = 'Votre commande a bien été enregistrée. Vous devriez recevoir sous peu un mail de confirmation.';
+        $this->get('session')->getFlashBag()->add($titre, $message);
+
+        return $this->redirectToRoute('home');
+    }
+    
+    public function annuleeAction($id_commande) {
+        $em = $this->getDoctrine()->getManager();
+        $crypt = $this->container->get('app.crypt');
+        $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
+        $commande->setStatus(2);
+        $em->persist($commande);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
     }
 }

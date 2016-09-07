@@ -152,6 +152,13 @@ class Commande
      * @ORM\Column(name="paypal_info", type="json_array", nullable=true)
      */
     private $paypalInfo;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="paiement_id", type="string", length=255, nullable=true)
+     */
+    private $paiementId;
 
     /**
      * Get id
@@ -557,5 +564,21 @@ class Commande
     public function setPaypalInfo($paypalInfo)
     {
         $this->paypalInfo = $paypalInfo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaiementId()
+    {
+        return $this->paiementId;
+    }
+
+    /**
+     * @param string $paiementId
+     */
+    public function setPaiementId($paiementId)
+    {
+        $this->paiementId = $paiementId;
     }
 }
