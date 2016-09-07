@@ -142,7 +142,7 @@ class PaiementController extends Controller
         $payplug = $this->get('shop.payplug');
         $paiement = $payplug->retrievePaiement($commande);
 
-        if ($paiement['object'] == 'payment' && $paiement['is_paid']) {
+        if ($paiement->object == 'payment' && $paiement->is_paid) {
             $commande->setStatus(3);
             $em->persist($commande);
             $em->flush();
