@@ -136,6 +136,9 @@ class PaiementController extends Controller
         $crypt = $this->container->get('app.crypt');
         $commande = $em->getRepository('ShopBundle:Commande')->findOneById($crypt->decrypt(urldecode($id_commande)));
 
+        if (!$commande)
+            throw new \Exception('Commande non trouvée !');
+
         $payplug = $this->get('shop.payplug');
         $paiement = $payplug->retrievePaiement($commande);
 
