@@ -1,24 +1,34 @@
 {% extends 'ShopBundle:Commande:layoutCommandeStep.html.twig' %}
 {% block BodyCommandeStep %}
-	{{ form_start(form, {'attr': {'role': 'form', 'id': 'form'} }) }}
 		<div class="row">
 			<div class="col-sm-12">
-				<label for="{{ form.email.vars.id }}" class="control-label">Votre message</label>
-				{{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': ''}}) }}
+				<p>Le site est encore en phase de lancement et devrait être entièrement opérationnel d'ici un mois. <br>
+					Nous reviendrons rapidement vers vous afin de finaliser votre commande (choix de la date, de l'heure et du lieu de livraison).<br>
+					<b>Pour vous remercier de votre confiance, nous vous offrons dès à présent 10% de réduction sur votre commande.</b></b><br>
+					Encore merci et à très bientôt,<br>
+					L'équipe BigDoudou</p>
+			</div>
+			<div class="col-sm-offset-8 col-sm-4">
+				<p>Nounours : {{ nounours_prix }}€<br>
+				<span style="color: red;"><b>Réduction : 10%</b></span><br>
+				Livraison : {{ fraisDePort }}€<br>
+				Total : {{ total }}€</p>
 			</div>
 		</div>
-		<div class="row marginT30 marginB20 marginT80lg">
-			<div class="col-sm-4 col-sm-offset-4">
-				<button type="submit" id="rent_submit" class="btn btn-block btn-primary">Offrir le BigDoudou</button>
+		<div class="row marginT30 marginB20">
+			<div class="col-sm-6 col-sm-offset-3">
+				<a href="{{ urlPayplug }}" id="rent_submit_payplug" class="btn btn-block btn-primary">Payer en CB</a>
+				<form action="https://www.paypal.com/cgi-bin/webscr" style="border-top: 0;">
+					{% for key, value in form %}
+						<input type="hidden" name="{{ key }}" value="{{ value }}">
+					{% endfor %}
+					<button type="submit" id="rent_submit_paypal" class="btn btn-block btn-primary">Paypal</button>
+				</form>
 			</div>
 		</div>
-		{{ form_rest(form) }}
-	{{ form_end(form) }}
 {% endblock %}
 
 {% block minititle %}
-	<h3 class="mini_title">Joignez un message à votre cadeau</h3>
-	<p class="subtext">Pensez à signer votre message ou alors gardez l\'anonymat...</p>
 {% endblock %}
 
 {% block breadcrumb %}

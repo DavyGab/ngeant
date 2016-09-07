@@ -12,8 +12,6 @@ class HomeController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $currentRoute = $request->attributes->get('_route');
-
         $commande = new Commande();
         $form = $this->get('form.factory')->create(CommandeEmailType::class, $commande);
 
@@ -39,29 +37,16 @@ class HomeController extends Controller
                 dump($this->get('session')); exit;
             } else {
                 $crypt = $this->get('app.crypt');
-
-                if ($currentRoute == 'home') {
-                    return $this->redirectToRoute('shop_step_2_message', array(
-                        'id_commande' => urlencode($crypt->crypt($commande->getId()))
-                    ));
-                } else {
-                    return $this->redirectToRoute('shop_reservation_precommande', array('id_commande' => urlencode($crypt->crypt($commande->getId()))));
-                }
-
+                return $this->redirectToRoute('shop_commande_step_2', array(
+                    'id_commande' => urlencode($crypt->crypt($commande->getId()))
+                ));
             }
         }
 
-        if ($currentRoute == 'home') {
-            $render_array = array(
-                'form' => $form->createView(),
-                'precommande' => 0
-            );
-        } else {
-            $render_array = array(
-                'form' => $form->createView(),
-                'precommande' => 1
-            );
-        }
+        $render_array = array(
+            'form' => $form->createView(),
+            'precommande' => 0
+        );
 
         return $this->render('AppBundle:Home:home.html.twig', $render_array);
     }

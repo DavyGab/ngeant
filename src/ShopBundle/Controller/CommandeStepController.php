@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Controller;
 
+use ShopBundle\Entity\PaypalInfo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ShopBundle\Form\CommandeType;
 use ShopBundle\Form\CommandeEmailType;
@@ -87,7 +88,7 @@ class CommandeStepController extends Controller
         );
     }
 
-    public function stepThreeAction(Request $request, $id_commande)
+    public function stepThreeAction($id_commande)
     {
         $em = $this->getDoctrine()->getManager();
         $crypt = $this->container->get('app.crypt');
@@ -101,7 +102,22 @@ class CommandeStepController extends Controller
         $payplug->setInfo($paiementPayplug);
         $em->persist($payplug);
 
-        return $this->redirect($paiementPayplug['url']);
+        $paypal = $this->get('shop.paypal');
+        $formPaypal = $paypal->createForm($commande);
+        $urlPayplug = $paiementPayplug['url'];
+
+        $info = $this->get('app.info');
+        $produit = $commande->getProduit();
+
+
+        return $this->render('ShopBundle:Commande:commandeStep3.html.twig', array(
+                'nounours_prix' => $info->getPrixProduit($produit['id']),
+                'fraisDePort' => $info->getFraisDeLivraison($commande->getCodePostal()),
+                'total' => $info->getPrixAvecPromo($produit['id']) + $info->getFraisDeLivraison($commande->getCodePostal()),
+                'form' => $formPaypal,
+                'urlPayplug' => $urlPayplug
+            )
+        );
     }
 }
 
