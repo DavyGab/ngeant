@@ -62,6 +62,8 @@ class HomeController extends Controller
             );
         }
 
-        return $this->render('AppBundle:Home:home.html.twig', $render_array);
+        $response = $this->render('AppBundle:Home:home.html.twig', $render_array);
+        $response->setSharedMaxAge(36000);
+        return $response;
     }
 }
