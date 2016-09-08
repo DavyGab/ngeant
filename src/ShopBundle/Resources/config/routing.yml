@@ -6,19 +6,20 @@ shop_commande_step_1:
 shop_commande_step_2:
     path:     /commande/message/{id_commande}
     defaults: { _controller: ShopBundle:CommandeStep:stepTwo }
-# Etape 3 : Recapitulatif
+# Etape 3 : Recapitulatif & lien vers paiement
 shop_commande_step_3:
     path:     /commande/paiement/{id_commande}
     defaults: { _controller: ShopBundle:CommandeStep:stepThree }
 
-# Commande validée -> redirection
+# Redirection après paiement validé
 shop_commande_validee:
     path:     /commande/paiement/validee/
     defaults: { _controller: ShopBundle:Paiement:validee }
-# Commande annulée -> redirection
+# Redirection après paiement annulée
 shop_commande_annulee:
     path:     /commande/paiement/annulee/{id_commande}
     defaults: { _controller: ShopBundle:Paiement:annulee }
+
 # Notification IPN PayPlug
 shop_commande_paylug:
     path:     /commande/paiement/payplug/{id_commande}

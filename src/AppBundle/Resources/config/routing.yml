@@ -2,7 +2,3 @@ home:
     path:     /
     defaults: { _controller: AppBundle:Home:index }
 
-home_precommande:
-    path:     /precommande
-    defaults: { _controller: AppBundle:Home:index }
-
